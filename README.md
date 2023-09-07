@@ -13,3 +13,4 @@
 - Operating functions: getICS, getEvents, loadEvents, parseHexColor.
 - Bugged functions: CalendarGeneration, main
 - *Not implemented currently: discord bot part*
+[Licence](LICENSE.md)
