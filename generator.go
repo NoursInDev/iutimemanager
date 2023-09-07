@@ -31,7 +31,7 @@ func getICS(url string, calendarsFolder string, filename string) (string, error)
     }
     defer response.Body.Close()
 
-    // Checking the response code status
+    // Check the response code status
     if response.StatusCode != http.StatusOK {
         return "0", fmt.Errorf("Erreur de téléchargement: Code de statut %d", response.StatusCode)
     }
@@ -45,7 +45,7 @@ func getICS(url string, calendarsFolder string, filename string) (string, error)
     }
     defer file.Close()
 
-    // Copy downloaded data to folder
+    // Download copy data to folder
     _, err = io.Copy(file, response.Body)
     if err != nil {
         return "0", err
@@ -61,7 +61,7 @@ func getICS(url string, calendarsFolder string, filename string) (string, error)
     }
     newFilename := fmt.Sprintf("%s-%s.%s", strings.TrimSuffix(parts[0], "_"), currentDate, parts[1])
 
-    // Renaming
+    // Rename file
     err = os.Rename(fullPath, calendarsFolder + newFilename)
     if err != nil {
         return "0", err
@@ -97,13 +97,13 @@ func getEvents(newFilename, calendarsFolder, startDate, endDate string) error {
     }
     defer jsonFile.Close()
 
-    // Crée un encodeur JSON pour écrire les données dans le fichier JSON
+    // Create a JSON encoder to write data to the JSON file
     encoder := json.NewEncoder(jsonFile)
 
-    // Crée un slice pour stocker tous les événements
+    // Create a slice to store all events
     var events []Event
 
-    // Variables temporaires pour stocker les informations de l'événement en cours de traitement
+    // Temporary variables to store event information currently being processed
     var currentEvent Event
     var currentKey string
 
@@ -112,15 +112,15 @@ func getEvents(newFilename, calendarsFolder, startDate, endDate string) error {
         line := scanner.Text()
         switch {
         case strings.HasPrefix(line, "DTSTART:"):
-            date := line[8:18] // Extrait la date de DTSTART au format YYYYMMDD
+            date := line[8:18] // Extract DTSTART date in YYYYMMDD format
             if date >= startDate && date <= endDate {
                 currentKey = date
             }
         case strings.HasPrefix(line, "DTEND:") && currentKey != "":
-            date := line[6:16] // Extrait la date de DTEND au format YYYYMMDD
+            date := line[6:16] // Extract DTEND date in YYYYMMDD format
             currentKey += "-" + date
 
-            // Ajoute l'événement au slice
+            // Add event to slice
             events = append(events, currentEvent)
         case currentKey != "":
             switch {
@@ -138,7 +138,7 @@ func getEvents(newFilename, calendarsFolder, startDate, endDate string) error {
         return err
     }
 
-    // Écrit tous les événements dans le fichier JSON
+    // Write all events to JSON file
     if err := encoder.Encode(events); err != nil {
         return err
     }
@@ -159,11 +159,11 @@ func CalendarGeneration() { // Calendar Generation function
 
 //
 func main() { // now for debogging 
-    url := "https://edt.univ-nantes.fr/iut_nantes/g3173.ics" // url en .ics
-    filename := "calendar.txt"                // nom du fichier (changeable par classe)
-	calendarsFolder := "iCalendars/"	// chemin d'enregistrement des calendriers
-	startDate := "20230901"
-	endDate := "20230930"
+    url := "https://edt.univ-nantes.fr/iut_nantes/g3173.ics"        // url in .ics format (>config.json)
+    filename := "calendar.txt"                                      // file name configuration (>config.json)
+	calendarsFolder := "iCalendars/"	                            // data file storage folder (>config.json)
+	startDate := "20230901"                                         // week start date
+	endDate := "20230930"                                           // week end date
 	//picturesFolder := "calendars/"
 	var newFilename string
 
