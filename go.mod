@@ -8,5 +8,6 @@ require (
 	github.com/channelmeter/iso8601duration v0.0.0-20150204201828-8da3af7a2a61 // indirect
 	github.com/fogleman/gg v1.3.0 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
+	github.com/llgcode/draw2d v0.0.0-20230723155556-e595d7c7e75e // indirect
 	golang.org/x/image v0.12.0 // indirect
 )
