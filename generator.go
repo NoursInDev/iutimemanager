@@ -115,14 +115,16 @@ func getEvents(newFilename, calendarsFolder, startDate, endDate string) (string,
         switch {
         case strings.HasPrefix(line, "DTSTART:"):
             date := line[8:18] // Extrait DTSTART date au format YYYYMMDD
+            fullDate := line[8:]
             if date >= startDate && date <= endDate {
                 currentKey = date
-                currentEvent.DtStart = date // Ajoutez la date DTSTART à l'événement actuel
+                currentEvent.DtStart = fullDate // Ajoutez la date DTSTART à l'événement actuel
             }
         case strings.HasPrefix(line, "DTEND:") && currentKey != "":
             date := line[6:16] // Extrait DTEND date au format YYYYMMDD
+            fullDate := line [6:]
             currentKey += "-" + date
-            currentEvent.DtEnd = date // Ajoutez la date DTEND à l'événement actuel
+            currentEvent.DtEnd = fullDate // Ajoutez la date DTEND à l'événement actuel
 
             // Ajoutez l'événement à la slice
             events = append(events, currentEvent)
