@@ -161,8 +161,8 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
     }
 
     // Créer une image avec une taille spécifique (vous pouvez ajuster la taille selon vos besoins)
-    const width = 800
-    const height = 600
+    const width = 1920
+    const height = 1080
     dc := gg.NewContext(width, height)
 
     // Définir les couleurs à partir des chaînes hexadécimales
@@ -172,12 +172,12 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
     scdHexColor := parseHexColor(scdColor)
 
     // Remplir l'arrière-plan avec la couleur scdHexColor
-    dc.SetColor(scdHexColor)
-    dc.Clear()
-
+    //dc.SetColor(markHexColor)
+    //dc.Clear()
+    fmt.Println(markHexColor)
     // Dessiner les barres horaires
-    dc.SetColor(markHexColor)
-    for i := 7; i <= 21; i++ {
+    dc.SetColor(scdHexColor)
+    for i := 7; i <= 20; i++ {
         x := float64(i-7) * width / 14
         dc.DrawLine(x, 0, x, height)
         dc.Stroke()
@@ -188,6 +188,7 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
     dc.LoadFontFace("/path/to/your/font.ttf", 12) // Spécifiez le chemin de votre police de caractères
 
     for _, event := range events {
+        fmt.Println(event)
         // Dessiner le rectangle de l'événement avec la couleur principale
         dc.SetColor(mainHexColor)
         dc.DrawRectangle(100, 100, 200, 100) // Spécifiez les coordonnées et les dimensions de votre rectangle
@@ -256,7 +257,7 @@ func main() { // now for debogging
     scdColor := "#F6928F"                                           // secondary color  (HEXA)
     textColor := "#FFFFFF"                                          // text color       (HEXA)
     markColor := "#FFE6FF"                                          // mark color       (HEXA)
-	var newFilename string
+	var newFilename string  
     var newJSONname string
 
     newFilename, err := getICS(url, calendarsFolder, filename)
