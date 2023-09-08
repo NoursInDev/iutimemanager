@@ -10,7 +10,7 @@
 > Config.js configuration: not currently implemented
 # CURRENT ADVANCEMENT
 - Alpha Dev Stage.
-- Operating functions: getICS, getEvents, loadEvents, parseHexColor.
-- Bugged functions: CalendarGeneration, main
+- Operating functions: getICS, loadEvents, parseHexColor.
+- Bugged functions: CalendarGeneration, main, getEvents
 - *Not implemented currently: discord bot part*
 > ***Please read the terms of use: [Licence](LICENSE.md)***
