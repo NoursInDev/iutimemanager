@@ -114,15 +114,17 @@ func getEvents(newFilename, calendarsFolder, startDate, endDate string) (string,
         line := scanner.Text()
         switch {
         case strings.HasPrefix(line, "DTSTART:"):
-            date := line[8:18] // Extract DTSTART date in YYYYMMDD format
+            date := line[8:18] // Extrait DTSTART date au format YYYYMMDD
             if date >= startDate && date <= endDate {
                 currentKey = date
+                currentEvent.DtStart = date // Ajoutez la date DTSTART à l'événement actuel
             }
         case strings.HasPrefix(line, "DTEND:") && currentKey != "":
-            date := line[6:16] // Extract DTEND date in YYYYMMDD format
+            date := line[6:16] // Extrait DTEND date au format YYYYMMDD
             currentKey += "-" + date
+            currentEvent.DtEnd = date // Ajoutez la date DTEND à l'événement actuel
 
-            // Add event to slice
+            // Ajoutez l'événement à la slice
             events = append(events, currentEvent)
         case currentKey != "":
             switch {
@@ -163,8 +165,9 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
     // Créer une image avec une taille spécifique (vous pouvez ajuster la taille selon vos besoins)
     const width = 1920
     const height = 1080
+    lineWidth := 5.0
     dc := gg.NewContext(width, height)
-
+    dc.SetLineWidth(lineWidth)
     // Définir les couleurs à partir des chaînes hexadécimales
     mainHexColor := parseHexColor(mainColor)
     textHexColor := parseHexColor(textColor)
@@ -177,8 +180,8 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
     fmt.Println(markHexColor)
     // Dessiner les barres horaires
     dc.SetColor(scdHexColor)
-    for i := 7; i <= 20; i++ {
-        x := float64(i-7) * width / 14
+    for i := 8; i <= 20; i++ {
+        x := float64(i-7) * width / 14 + lineWidth/2 
         dc.DrawLine(x, 0, x, height)
         dc.Stroke()
     }
