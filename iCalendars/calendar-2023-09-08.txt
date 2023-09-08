@@ -48,6 +48,24 @@ DESCRIPTION:Groupe : INFO 1 Promo\nSalle : J-Amphi 1\n
 CATEGORIES:CELCAT Timetabler (vcal) - 2024
 END:VEVENT
 BEGIN:VEVENT
+DTSTART:20230911T060000Z
+DTEND:20230911T072000Z
+UID:CELCAT - 2024 (1128963-5)
+SUMMARY:Cours - Maths discrètes\, INFO 1 Promo\, SIMONNEAU François
+LOCATION:J-Amphi 1
+DESCRIPTION:Matière : Maths discrètes\nPersonnel : SIMONNEAU François\nGroupe : INFO 1 Promo\nSalle : J-Amphi 1\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230918T060000Z
+DTEND:20230918T072000Z
+UID:CELCAT - 2024 (1129197-6)
+SUMMARY:Cours - Maths discrètes\, INFO 1 Promo\, SIMONNEAU François
+LOCATION:J-Amphi 1
+DESCRIPTION:Matière : Maths discrètes\nPersonnel : SIMONNEAU François\nGroupe : INFO 1 Promo\nSalle : J-Amphi 1\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
 DTSTART:20231030T070000Z
 DTEND:20231030T190000Z
 UID:CELCAT - 2024 (1088754-12)
@@ -102,6 +120,87 @@ DESCRIPTION:
 CATEGORIES:CELCAT Timetabler (vcal) - 2024
 END:VEVENT
 BEGIN:VEVENT
+DTSTART:20230911T073000Z
+DTEND:20230911T085000Z
+UID:CELCAT - 2024 (1128979-5)
+SUMMARY:TP - Maths discrètes\, INFO 1 TP 4-2\, COHEN Julien
+LOCATION:J-E1/17
+DESCRIPTION:Matière : Maths discrètes\nPersonnel : COHEN Julien\nGroupe : INFO 1 TP 4-2\nSalle : J-E1/17\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230918T073000Z
+DTEND:20230918T085000Z
+UID:CELCAT - 2024 (1129157-6)
+SUMMARY:Cours - Initiation au développement\, INFO 1 Promo\, JEZEQUEL Loïg
+LOCATION:J-Amphi 1
+DESCRIPTION:Matière : Initiation au développement\nPersonnel : JEZEQUEL Loïg\nGroupe : INFO 1 Promo\nSalle : J-Amphi 1\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230918T090000Z
+DTEND:20230918T102000Z
+UID:CELCAT - 2024 (1129179-6)
+SUMMARY:Cours - Introduction archi.\, INFO 1 Promo\, FAUCOU Sebastien
+LOCATION:J-Amphi 1
+DESCRIPTION:Matière : Introduction archi.\nPersonnel : FAUCOU Sebastien\nGroupe : INFO 1 Promo\nSalle : J-Amphi 1\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230911T113000Z
+DTEND:20230911T125000Z
+UID:CELCAT - 2024 (1128942-5)
+SUMMARY:Cours - Introduction archi.\, INFO 1 Promo\, FAUCOU Sebastien
+LOCATION:J-Amphi 1
+DESCRIPTION:Matière : Introduction archi.\nPersonnel : FAUCOU Sebastien\nGroupe : INFO 1 Promo\nSalle : J-Amphi 1\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230918T113000Z
+DTEND:20230918T125000Z
+UID:CELCAT - 2024 (1129249-6)
+SUMMARY:TD - Bases de la communication\, INFO 1 Groupe 4\, CAZALAS Sebastien
+LOCATION:J-C0/05
+DESCRIPTION:Matière : Bases de la communication\nPersonnel : CAZALAS Sebastien\nGroupe : INFO 1 Groupe 4\nSalle : J-C0/05\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230911T130000Z
+DTEND:20230911T142000Z
+UID:CELCAT - 2024 (1129027-5)
+SUMMARY:TD - Bases de la communication\, INFO 1 Groupe 4\, CAZALAS Sebastien
+LOCATION:J-E1/14
+DESCRIPTION:Matière : Bases de la communication\nPersonnel : CAZALAS Sebastien\nGroupe : INFO 1 Groupe 4\nSalle : J-E1/14\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230918T130000Z
+DTEND:20230918T142000Z
+UID:CELCAT - 2024 (1129229-6)
+SUMMARY:TP - Gestion projet orga. 1\, INFO 1 TP 4-2\, ISMAIL Olfa
+LOCATION:J-C0/05
+DESCRIPTION:Matière : Gestion projet orga. 1\nPersonnel : ISMAIL Olfa\nGroupe : INFO 1 TP 4-2\nSalle : J-C0/05\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230911T143000Z
+DTEND:20230911T155000Z
+UID:CELCAT - 2024 (1128920-5)
+SUMMARY:Cours - Initiation au développement\, INFO 1 Promo\, JEZEQUEL Loïg
+LOCATION:J-Amphi 1
+DESCRIPTION:Matière : Initiation au développement\nPersonnel : JEZEQUEL Loïg\nGroupe : INFO 1 Promo\nSalle : J-Amphi 1\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230918T143000Z
+DTEND:20230918T155000Z
+UID:CELCAT - 2024 (1129213-6)
+SUMMARY:TP - Maths discrètes\, INFO 1 TP 4-2\, COHEN Julien
+LOCATION:J-C0/05
+DESCRIPTION:Matière : Maths discrètes\nPersonnel : COHEN Julien\nGroupe : INFO 1 TP 4-2\nSalle : J-C0/05\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
 DTSTART:20230808T060000Z
 DTEND:20230808T180000Z
 UID:CELCAT - 2024 (1088746-0)
@@ -126,6 +225,15 @@ UID:CELCAT - 2024 (1088746-20)
 SUMMARY:XXX-Fermeture IUT - 
 LOCATION:
 DESCRIPTION:
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230912T060000Z
+DTEND:20230912T072000Z
+UID:CELCAT - 2024 (1128930-5)
+SUMMARY:TD - Initiation au développement\, INFO 1 Groupe 4\, BERDJUGIN Jean-François
+LOCATION:J-E1/14
+DESCRIPTION:Matière : Initiation au développement\nPersonnel : BERDJUGIN Jean-François\nGroupe : INFO 1 Groupe 4\nSalle : J-E1/14\n
 CATEGORIES:CELCAT Timetabler (vcal) - 2024
 END:VEVENT
 BEGIN:VEVENT
@@ -183,12 +291,48 @@ DESCRIPTION:Matière : Bases de la communication\nPersonnel : CAZALAS Sebastien\
 CATEGORIES:CELCAT Timetabler (vcal) - 2024
 END:VEVENT
 BEGIN:VEVENT
+DTSTART:20230912T073000Z
+DTEND:20230912T085000Z
+UID:CELCAT - 2024 (1128931-5)
+SUMMARY:TD - Initiation au développement\, INFO 1 Groupe 4\, BERDJUGIN Jean-François
+LOCATION:J-E1/14
+DESCRIPTION:Matière : Initiation au développement\nPersonnel : BERDJUGIN Jean-François\nGroupe : INFO 1 Groupe 4\nSalle : J-E1/14\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230919T073000Z
+DTEND:20230919T085000Z
+UID:CELCAT - 2024 (1129220-6)
+SUMMARY:TD - Gestion projet orga. 1\, INFO 1 Groupe 4\, ISMAIL Olfa
+LOCATION:J-C0/02
+DESCRIPTION:Matière : Gestion projet orga. 1\nPersonnel : ISMAIL Olfa\nGroupe : INFO 1 Groupe 4\nSalle : J-C0/02\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
 DTSTART:20230905T090000Z
 DTEND:20230905T102000Z
 UID:CELCAT - 2024 (1126172-4)
 SUMMARY:Cours - Initiation au développement\, INFO 1 Promo\, JEZEQUEL Loïg
 LOCATION:J-Amphi 1
 DESCRIPTION:Matière : Initiation au développement\nPersonnel : JEZEQUEL Loïg\nGroupe : INFO 1 Promo\nSalle : J-Amphi 1\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230912T090000Z
+DTEND:20230912T102000Z
+UID:CELCAT - 2024 (1128932-5)
+SUMMARY:TD - Initiation au développement\, INFO 1 Groupe 4\, BERDJUGIN Jean-François
+LOCATION:J-E1/14
+DESCRIPTION:Matière : Initiation au développement\nPersonnel : BERDJUGIN Jean-François\nGroupe : INFO 1 Groupe 4\nSalle : J-E1/14\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230919T090000Z
+DTEND:20230919T102000Z
+UID:CELCAT - 2024 (1129253-6)
+SUMMARY:TD - Bases de la communication\, INFO 1 Groupe 4\, CAZALAS Sebastien
+LOCATION:J-C0/02
+DESCRIPTION:Matière : Bases de la communication\nPersonnel : CAZALAS Sebastien\nGroupe : INFO 1 Groupe 4\nSalle : J-C0/02\n
 CATEGORIES:CELCAT Timetabler (vcal) - 2024
 END:VEVENT
 BEGIN:VEVENT
@@ -201,6 +345,24 @@ DESCRIPTION:Matière : Initiation au développement\nPersonnel : BERDJUGIN Jean-
 CATEGORIES:CELCAT Timetabler (vcal) - 2024
 END:VEVENT
 BEGIN:VEVENT
+DTSTART:20230912T113000Z
+DTEND:20230912T125000Z
+UID:CELCAT - 2024 (1128961-5)
+SUMMARY:TP - Introduction archi.\, INFO 1 TP 4-2\, GIRAUD Pierre
+LOCATION:J-C0/02
+DESCRIPTION:Matière : Introduction archi.\nPersonnel : GIRAUD Pierre\nGroupe : INFO 1 TP 4-2\nSalle : J-C0/02\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230919T113000Z
+DTEND:20230919T125000Z
+UID:CELCAT - 2024 (1129167-6)
+SUMMARY:TD - Initiation au développement\, INFO 1 Groupe 4\, BERDJUGIN Jean-François
+LOCATION:J-C0/05
+DESCRIPTION:Matière : Initiation au développement\nPersonnel : BERDJUGIN Jean-François\nGroupe : INFO 1 Groupe 4\nSalle : J-C0/05\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
 DTSTART:20230905T130000Z
 DTEND:20230905T142000Z
 UID:CELCAT - 2024 (1126184-4)
@@ -210,12 +372,48 @@ DESCRIPTION:Matière : Initiation au développement\nPersonnel : BERDJUGIN Jean-
 CATEGORIES:CELCAT Timetabler (vcal) - 2024
 END:VEVENT
 BEGIN:VEVENT
+DTSTART:20230912T130000Z
+DTEND:20230912T142000Z
+UID:CELCAT - 2024 (1128962-5)
+SUMMARY:TP - Introduction archi.\, INFO 1 TP 4-2\, GIRAUD Pierre
+LOCATION:J-C0/02
+DESCRIPTION:Matière : Introduction archi.\nPersonnel : GIRAUD Pierre\nGroupe : INFO 1 TP 4-2\nSalle : J-C0/02\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230919T130000Z
+DTEND:20230919T142000Z
+UID:CELCAT - 2024 (1129168-6)
+SUMMARY:TD - Initiation au développement\, INFO 1 Groupe 4\, BERDJUGIN Jean-François
+LOCATION:J-C0/05
+DESCRIPTION:Matière : Initiation au développement\nPersonnel : BERDJUGIN Jean-François\nGroupe : INFO 1 Groupe 4\nSalle : J-C0/05\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
 DTSTART:20230905T143000Z
 DTEND:20230905T155000Z
 UID:CELCAT - 2024 (1126185-4)
 SUMMARY:TD - Initiation au développement\, INFO 1 Groupe 4\, BERDJUGIN Jean-François
 LOCATION:J-C0/03
 DESCRIPTION:Matière : Initiation au développement\nPersonnel : BERDJUGIN Jean-François\nGroupe : INFO 1 Groupe 4\nSalle : J-C0/03\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230912T143000Z
+DTEND:20230912T155000Z
+UID:CELCAT - 2024 (1129002-5)
+SUMMARY:TP - Gestion projet orga. 1\, INFO 1 TP 4-2\, ISMAIL Olfa
+LOCATION:J-C0/02
+DESCRIPTION:Matière : Gestion projet orga. 1\nPersonnel : ISMAIL Olfa\nGroupe : INFO 1 TP 4-2\nSalle : J-C0/02\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230919T143000Z
+DTEND:20230919T155000Z
+UID:CELCAT - 2024 (1129169-6)
+SUMMARY:TD - Initiation au développement\, INFO 1 Groupe 4\, BERDJUGIN Jean-François
+LOCATION:J-C0/05
+DESCRIPTION:Matière : Initiation au développement\nPersonnel : BERDJUGIN Jean-François\nGroupe : INFO 1 Groupe 4\nSalle : J-C0/05\n
 CATEGORIES:CELCAT Timetabler (vcal) - 2024
 END:VEVENT
 BEGIN:VEVENT
@@ -252,6 +450,24 @@ UID:CELCAT - 2024 (1126208-4)
 SUMMARY:Cours - Maths discrètes\, INFO 1 Promo\, SIMONNEAU François
 LOCATION:J-Amphi 1
 DESCRIPTION:Matière : Maths discrètes\nPersonnel : SIMONNEAU François\nGroupe : INFO 1 Promo\nSalle : J-Amphi 1\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230913T060000Z
+DTEND:20230913T072000Z
+UID:CELCAT - 2024 (1128933-5)
+SUMMARY:Cours - Développement interfaces web\, INFO 1 Promo\, BERDJUGIN Jean-François
+LOCATION:J-Amphi 1
+DESCRIPTION:Matière : Développement interfaces web\nPersonnel : BERDJUGIN Jean-François\nGroupe : INFO 1 Promo\nSalle : J-Amphi 1\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230920T060000Z
+DTEND:20230920T072000Z
+UID:CELCAT - 2024 (1129170-6)
+SUMMARY:Cours - Développement interfaces web\, INFO 1 Promo\, BERDJUGIN Jean-François
+LOCATION:J-Amphi 1
+DESCRIPTION:Matière : Développement interfaces web\nPersonnel : BERDJUGIN Jean-François\nGroupe : INFO 1 Promo\nSalle : J-Amphi 1\n
 CATEGORIES:CELCAT Timetabler (vcal) - 2024
 END:VEVENT
 BEGIN:VEVENT
@@ -309,12 +525,66 @@ DESCRIPTION:Matière : Maths discrètes\nPersonnel : SIMONNEAU François\nGroupe
 CATEGORIES:CELCAT Timetabler (vcal) - 2024
 END:VEVENT
 BEGIN:VEVENT
+DTSTART:20230913T073000Z
+DTEND:20230913T085000Z
+UID:CELCAT - 2024 (1129023-5)
+SUMMARY:TD - Bases de la communication\, INFO 1 Groupe 4\, CAZALAS Sebastien
+LOCATION:J-C1/14
+DESCRIPTION:Matière : Bases de la communication\nPersonnel : CAZALAS Sebastien\nGroupe : INFO 1 Groupe 4\nSalle : J-C1/14\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230920T073000Z
+DTEND:20230920T085000Z
+UID:CELCAT - 2024 (1129205-6)
+SUMMARY:TD - Maths discrètes\, INFO 1 Groupe 4\, COHEN Julien
+LOCATION:J-C0/02
+DESCRIPTION:Matière : Maths discrètes\nPersonnel : COHEN Julien\nGroupe : INFO 1 Groupe 4\nSalle : J-C0/02\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230913T090000Z
+DTEND:20230913T102000Z
+UID:CELCAT - 2024 (1128940-5)
+SUMMARY:TD - Développement interfaces web\, INFO 1 Groupe 4\, LANCE Nicolas
+LOCATION:J-C1/14
+DESCRIPTION:Matière : Développement interfaces web\nPersonnel : LANCE Nicolas\nGroupe : INFO 1 Groupe 4\nSalle : J-C1/14\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230920T090000Z
+DTEND:20230920T102000Z
+UID:CELCAT - 2024 (1129204-6)
+SUMMARY:TD - Maths discrètes\, INFO 1 Groupe 4\, COHEN Julien
+LOCATION:J-C0/02
+DESCRIPTION:Matière : Maths discrètes\nPersonnel : COHEN Julien\nGroupe : INFO 1 Groupe 4\nSalle : J-C0/02\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
 DTSTART:20230906T113000Z
 DTEND:20230906T125000Z
 UID:CELCAT - 2024 (1126186-4)
 SUMMARY:Cours - Introduction archi.\, INFO 1 Promo\, FAUCOU Sebastien
 LOCATION:J-Amphi 1
 DESCRIPTION:Matière : Introduction archi.\nPersonnel : FAUCOU Sebastien\nGroupe : INFO 1 Promo\nSalle : J-Amphi 1\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230913T113000Z
+DTEND:20230913T125000Z
+UID:CELCAT - 2024 (1128946-5)
+SUMMARY:TD - Introduction archi.\, INFO 1 Groupe 4\, GIRAUD Pierre
+LOCATION:J-C0/05
+DESCRIPTION:Matière : Introduction archi.\nPersonnel : GIRAUD Pierre\nGroupe : INFO 1 Groupe 4\nSalle : J-C0/05\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230920T113000Z
+DTEND:20230920T125000Z
+UID:CELCAT - 2024 (1129182-6)
+SUMMARY:TD - Introduction archi.\, INFO 1 Groupe 4\, GIRAUD Pierre
+LOCATION:J-C0/03
+DESCRIPTION:Matière : Introduction archi.\nPersonnel : GIRAUD Pierre\nGroupe : INFO 1 Groupe 4\nSalle : J-C0/03\n
 CATEGORIES:CELCAT Timetabler (vcal) - 2024
 END:VEVENT
 BEGIN:VEVENT
@@ -327,12 +597,48 @@ DESCRIPTION:Matière : Maths discrètes\nPersonnel : COHEN Julien\nGroupe : INFO
 CATEGORIES:CELCAT Timetabler (vcal) - 2024
 END:VEVENT
 BEGIN:VEVENT
+DTSTART:20230913T130000Z
+DTEND:20230913T142000Z
+UID:CELCAT - 2024 (1129018-5)
+SUMMARY:TP - Anglais technique\, INFO 1 TP 4-2\, GREGORY David
+LOCATION:J-E0/02
+DESCRIPTION:Matière : Anglais technique\nPersonnel : GREGORY David\nGroupe : INFO 1 TP 4-2\nSalle : J-E0/02\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230920T130000Z
+DTEND:20230920T142000Z
+UID:CELCAT - 2024 (1129195-6)
+SUMMARY:TP - Introduction archi.\, INFO 1 TP 4-2\, GIRAUD Pierre
+LOCATION:J-C0/03
+DESCRIPTION:Matière : Introduction archi.\nPersonnel : GIRAUD Pierre\nGroupe : INFO 1 TP 4-2\nSalle : J-C0/03\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
 DTSTART:20230906T143000Z
 DTEND:20230906T155000Z
 UID:CELCAT - 2024 (1126216-4)
 SUMMARY:TD - Maths discrètes\, INFO 1 Groupe 4\, COHEN Julien
 LOCATION:J-E2/22
 DESCRIPTION:Matière : Maths discrètes\nPersonnel : COHEN Julien\nGroupe : INFO 1 Groupe 4\nSalle : J-E2/22\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230913T143000Z
+DTEND:20230913T155000Z
+UID:CELCAT - 2024 (1129019-5)
+SUMMARY:TP - Anglais technique\, INFO 1 TP 4-2\, GREGORY David
+LOCATION:J-E0/02
+DESCRIPTION:Matière : Anglais technique\nPersonnel : GREGORY David\nGroupe : INFO 1 TP 4-2\nSalle : J-E0/02\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230920T143000Z
+DTEND:20230920T155000Z
+UID:CELCAT - 2024 (1129196-6)
+SUMMARY:TP - Introduction archi.\, INFO 1 TP 4-2\, GIRAUD Pierre
+LOCATION:J-C0/03
+DESCRIPTION:Matière : Introduction archi.\nPersonnel : GIRAUD Pierre\nGroupe : INFO 1 TP 4-2\nSalle : J-C0/03\n
 CATEGORIES:CELCAT Timetabler (vcal) - 2024
 END:VEVENT
 BEGIN:VEVENT
@@ -417,9 +723,27 @@ DESCRIPTION:Matière : Anglais technique\nPersonnel : GREGORY David\nGroupe : IN
 CATEGORIES:CELCAT Timetabler (vcal) - 2024
 END:VEVENT
 BEGIN:VEVENT
+DTSTART:20230921T073000Z
+DTEND:20230921T085000Z
+UID:CELCAT - 2024 (1129245-6)
+SUMMARY:TP - Anglais technique\, INFO 1 TP 4-2\, GREGORY David
+LOCATION:J-E0/02
+DESCRIPTION:Matière : Anglais technique\nPersonnel : GREGORY David\nGroupe : INFO 1 TP 4-2\nSalle : J-E0/02\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
 DTSTART:20230907T090000Z
 DTEND:20230907T102000Z
 UID:CELCAT - 2024 (1126247-4)
+SUMMARY:TP - Anglais technique\, INFO 1 TP 4-2\, GREGORY David
+LOCATION:J-E0/02
+DESCRIPTION:Matière : Anglais technique\nPersonnel : GREGORY David\nGroupe : INFO 1 TP 4-2\nSalle : J-E0/02\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230921T090000Z
+DTEND:20230921T102000Z
+UID:CELCAT - 2024 (1129244-6)
 SUMMARY:TP - Anglais technique\, INFO 1 TP 4-2\, GREGORY David
 LOCATION:J-E0/02
 DESCRIPTION:Matière : Anglais technique\nPersonnel : GREGORY David\nGroupe : INFO 1 TP 4-2\nSalle : J-E0/02\n
@@ -456,6 +780,15 @@ BEGIN:VEVENT
 DTSTART:20230908T060000Z
 DTEND:20230908T072000Z
 UID:CELCAT - 2024 (1126215-4)
+SUMMARY:TD - Maths discrètes\, INFO 1 Groupe 4\, COHEN Julien
+LOCATION:J-E2/22
+DESCRIPTION:Matière : Maths discrètes\nPersonnel : COHEN Julien\nGroupe : INFO 1 Groupe 4\nSalle : J-E2/22\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230915T060000Z
+DTEND:20230915T072000Z
+UID:CELCAT - 2024 (1128970-5)
 SUMMARY:TD - Maths discrètes\, INFO 1 Groupe 4\, COHEN Julien
 LOCATION:J-E2/22
 DESCRIPTION:Matière : Maths discrètes\nPersonnel : COHEN Julien\nGroupe : INFO 1 Groupe 4\nSalle : J-E2/22\n
@@ -507,12 +840,30 @@ DESCRIPTION:Matière : Introduction archi.\nPersonnel : GIRAUD Pierre\nGroupe : 
 CATEGORIES:CELCAT Timetabler (vcal) - 2024
 END:VEVENT
 BEGIN:VEVENT
+DTSTART:20230915T073000Z
+DTEND:20230915T085000Z
+UID:CELCAT - 2024 (1129003-5)
+SUMMARY:TP - Gestion projet orga. 1\, INFO 1 TP 4-2\, ISMAIL Olfa
+LOCATION:J-C0/01
+DESCRIPTION:Matière : Gestion projet orga. 1\nPersonnel : ISMAIL Olfa\nGroupe : INFO 1 TP 4-2\nSalle : J-C0/01\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
 DTSTART:20230908T090000Z
 DTEND:20230908T102000Z
 UID:CELCAT - 2024 (1126206-4)
 SUMMARY:TP - Introduction archi.\, INFO 1 TP 4-2\, GIRAUD Pierre
 LOCATION:J-E1/17
 DESCRIPTION:Matière : Introduction archi.\nPersonnel : GIRAUD Pierre\nGroupe : INFO 1 TP 4-2\nSalle : J-E1/17\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230915T090000Z
+DTEND:20230915T102000Z
+UID:CELCAT - 2024 (1128987-5)
+SUMMARY:TD - Gestion projet orga. 1\, INFO 1 Groupe 4\, ISMAIL Olfa
+LOCATION:J-C0/01
+DESCRIPTION:Matière : Gestion projet orga. 1\nPersonnel : ISMAIL Olfa\nGroupe : INFO 1 Groupe 4\nSalle : J-C0/01\n
 CATEGORIES:CELCAT Timetabler (vcal) - 2024
 END:VEVENT
 BEGIN:VEVENT
@@ -525,6 +876,24 @@ DESCRIPTION:Matière : Gestion projet orga. 1\nPersonnel : ISMAIL Olfa\nGroupe :
 CATEGORIES:CELCAT Timetabler (vcal) - 2024
 END:VEVENT
 BEGIN:VEVENT
+DTSTART:20230915T113000Z
+DTEND:20230915T125000Z
+UID:CELCAT - 2024 (1128941-5)
+SUMMARY:TD - Développement interfaces web\, INFO 1 Groupe 4\, LANCE Nicolas
+LOCATION:J-Labo de Langues
+DESCRIPTION:Matière : Développement interfaces web\nPersonnel : LANCE Nicolas\nGroupe : INFO 1 Groupe 4\nSalle : J-Labo de Langues\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230922T113000Z
+DTEND:20230922T125000Z
+UID:CELCAT - 2024 (1129177-6)
+SUMMARY:TD - Développement interfaces web\, INFO 1 Groupe 4\, LANCE Nicolas
+LOCATION:J-C1/14
+DESCRIPTION:Matière : Développement interfaces web\nPersonnel : LANCE Nicolas\nGroupe : INFO 1 Groupe 4\nSalle : J-C1/14\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
 DTSTART:20230908T130000Z
 DTEND:20230908T142000Z
 UID:CELCAT - 2024 (1126231-4)
@@ -534,12 +903,48 @@ DESCRIPTION:Matière : Gestion projet orga. 1\nPersonnel : ISMAIL Olfa\nGroupe :
 CATEGORIES:CELCAT Timetabler (vcal) - 2024
 END:VEVENT
 BEGIN:VEVENT
+DTSTART:20230915T130000Z
+DTEND:20230915T142000Z
+UID:CELCAT - 2024 (1128986-5)
+SUMMARY:TD - Gestion projet orga. 1\, INFO 1 Groupe 4\, ISMAIL Olfa
+LOCATION:J-Labo de Langues
+DESCRIPTION:Matière : Gestion projet orga. 1\nPersonnel : ISMAIL Olfa\nGroupe : INFO 1 Groupe 4\nSalle : J-Labo de Langues\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230922T130000Z
+DTEND:20230922T142000Z
+UID:CELCAT - 2024 (1129178-6)
+SUMMARY:TD - Développement interfaces web\, INFO 1 Groupe 4\, LANCE Nicolas
+LOCATION:J-C1/14
+DESCRIPTION:Matière : Développement interfaces web\nPersonnel : LANCE Nicolas\nGroupe : INFO 1 Groupe 4\nSalle : J-C1/14\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
 DTSTART:20230908T143000Z
 DTEND:20230908T155000Z
 UID:CELCAT - 2024 (1126256-4)
 SUMMARY:TD - Bases de la communication\, INFO 1 Groupe 4\, CAZALAS Sebastien
 LOCATION:J-E2/22
 DESCRIPTION:Matière : Bases de la communication\nPersonnel : CAZALAS Sebastien\nGroupe : INFO 1 Groupe 4\nSalle : J-E2/22\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230915T143000Z
+DTEND:20230915T155000Z
+UID:CELCAT - 2024 (1128971-5)
+SUMMARY:TD - Maths discrètes\, INFO 1 Groupe 4\, COHEN Julien
+LOCATION:J-Labo de Langues
+DESCRIPTION:Matière : Maths discrètes\nPersonnel : COHEN Julien\nGroupe : INFO 1 Groupe 4\nSalle : J-Labo de Langues\n
+CATEGORIES:CELCAT Timetabler (vcal) - 2024
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20230922T143000Z
+DTEND:20230922T155000Z
+UID:CELCAT - 2024 (1129221-6)
+SUMMARY:TD - Gestion projet orga. 1\, INFO 1 Groupe 4\, ISMAIL Olfa
+LOCATION:J-C1/14
+DESCRIPTION:Matière : Gestion projet orga. 1\nPersonnel : ISMAIL Olfa\nGroupe : INFO 1 Groupe 4\nSalle : J-C1/14\n
 CATEGORIES:CELCAT Timetabler (vcal) - 2024
 END:VEVENT
 BEGIN:VEVENT
