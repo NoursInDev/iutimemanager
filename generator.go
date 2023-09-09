@@ -163,6 +163,7 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
     if err != nil {
         return err
     }
+    fmt.Println(events)
 
     // Créer une image avec une taille spécifique (vous pouvez ajuster la taille selon vos besoins)
     const width = 1920
