@@ -204,8 +204,6 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
         DtStart_data := event.DtStart
         DtEnd_data := event.DtEnd
 
-        fmt.Println(DtEnd_data, DtStart_data)
-
         dtstart_date_data, _ := extractDate(DtStart_data)
         dtstart_hour_data, _ := extractHour(DtStart_data)
         dtend_hour_data, _ := extractHour(DtEnd_data)
@@ -223,15 +221,15 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
             fmt.Println("Erreur:", err)
         }
 
-        x1_placement := x1_placement_var * width / 5 - (x_offset)
-        x2_placement := x1_placement_var + 1 * width / 5 - (x_offset)
-        y1_placement := y1_placement_var * height / 14 - 7 * (height / 14)
-        y2_placement := y2_placement_var * height / 14 - 7 * (height / 14)
-        fmt.Println(y1_placement, y2_placement)
+        x1_placement := ((x1_placement_var - 1) * width / 5) + (x_offset) - 50*x1_placement_var
+        x2_placement := float64(width / 5) - 150
+        y1_placement := (y1_placement_var - 7) * height / 14
+        y2_placement := 1.33 * height / 14
+        fmt.Println(y1_placement, y2_placement_var)
 
 
         dc.SetColor(mainHexColor)
-        dc.DrawRectangle(x1_placement + 10, y1_placement, x2_placement - 10, y2_placement) // Spécifiez les coordonnées et les dimensions de votre rectangle
+        dc.DrawRectangle(x1_placement, y1_placement, x2_placement, y2_placement) // Spécifiez les coordonnées et les dimensions de votre rectangle
         dc.Fill()
 
         // Écrire le nom, le lieu et la description de l'événement avec la couleur du texte
