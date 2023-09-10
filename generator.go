@@ -11,6 +11,7 @@ import (
 	"encoding/json"
     "image/color"
     "github.com/fogleman/gg"
+    "strconv"
 )
 
 //
@@ -182,14 +183,14 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
     fmt.Println(markHexColor)
     // Dessiner les barres horaires
     dc.SetColor(scdHexColor)
-    x_offset := 0.1 * width - 50
+    x_offset := 0.1 * width
     for i := 8; i <= 20; i++ {
         y := float64(i-7) * height / 14 + lineWidth/2
         dc.DrawLine( 0, y, width, y)
         dc.Stroke()
     }
     for i:= 1; i <= 5; i++ {
-        x := float64(i) * width / 5 * 0.9 + lineWidth/2 - (x_offset)
+        x := float64(i) * width / 5 * 0.9 + lineWidth/2 - (x_offset) - 50
         dc.DrawLine(x, 0, x, height)
         dc.Stroke()
     }
@@ -199,16 +200,38 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
     dc.LoadFontFace("/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf", 12) // Spécifiez le chemin de votre police de caractères
 
     for _, event := range events {
-        //fmt.Println(event)
         // Dessiner le rectangle de l'événement avec la couleur principale
         DtStart_data := event.DtStart
         DtEnd_data := event.DtEnd
+
         fmt.Println(DtEnd_data, DtStart_data)
+
         dtstart_date_data, _ := extractDate(DtStart_data)
         dtstart_hour_data, _ := extractHour(DtStart_data)
-        fmt.Println(dtstart_date_data, dtstart_hour_data)
+        dtend_hour_data, _ := extractHour(DtEnd_data)
+
+        x1_placement_var, err := getDayOfWeek(dtstart_date_data)
+        if err != nil {
+            fmt.Println("Erreur:", err)
+        }
+        y1_placement_var, err := timeStringToHours(dtstart_hour_data)
+        if err != nil {
+            fmt.Println("Erreur:", err)
+        }
+        y2_placement_var, err := timeStringToHours(dtend_hour_data)
+        if err != nil {
+            fmt.Println("Erreur:", err)
+        }
+
+        x1_placement := x1_placement_var * width / 5 - (x_offset)
+        x2_placement := x1_placement_var + 1 * width / 5 - (x_offset)
+        y1_placement := y1_placement_var * height / 14 - 7 * (height / 14)
+        y2_placement := y2_placement_var * height / 14 - 7 * (height / 14)
+        fmt.Println(y1_placement, y2_placement)
+
+
         dc.SetColor(mainHexColor)
-        dc.DrawRectangle(100, 100, 200, 100) // Spécifiez les coordonnées et les dimensions de votre rectangle
+        dc.DrawRectangle(x1_placement + 10, y1_placement, x2_placement - 10, y2_placement) // Spécifiez les coordonnées et les dimensions de votre rectangle
         dc.Fill()
 
         // Écrire le nom, le lieu et la description de l'événement avec la couleur du texte
@@ -287,7 +310,7 @@ func extractHour(input string) (string, error) {
     return hourStr, nil
 }
 
-func getDayOfWeek(inputDate string) (int, error) {
+func getDayOfWeek(inputDate string) (float64, error) {
     // Convertir la chaîne d'entrée au format "YYYYMMDD" en une valeur de type time.Time
     date, err := time.Parse("20060102", inputDate)
     if err != nil {
@@ -295,7 +318,7 @@ func getDayOfWeek(inputDate string) (int, error) {
     }
 
     // Obtenir le jour de la semaine (0 = dimanche, 1 = lundi, ..., 6 = samedi)
-    dayOfWeek := int(date.Weekday())
+    dayOfWeek := float64(date.Weekday())
 
     // Remapper le dimanche de 0 à 7
     if dayOfWeek == 0 {
@@ -304,6 +327,40 @@ func getDayOfWeek(inputDate string) (int, error) {
 
     return dayOfWeek, nil
 }
+
+func timeStringToHours(input string) (float64, error) {
+    // Assurez-vous que la chaîne d'entrée a une longueur valide (HHMMSS)
+    if len(input) != 6 {
+        return 0, fmt.Errorf("Problème de la chaine d'entrée: pas sous format (HHMMSS)")
+    }
+
+    // Extraire les heures, les minutes et les secondes de la chaîne d'entrée
+    hoursStr := input[0:2]
+    minutesStr := input[2:4]
+    secondsStr := input[4:6]
+
+    // Convertir les parties de la chaîne en entiers
+    hours, err := strconv.Atoi(hoursStr)
+    if err != nil {
+        return 0, err
+    }
+
+    minutes, err := strconv.Atoi(minutesStr)
+    if err != nil {
+        return 0, err
+    }
+
+    seconds, err := strconv.Atoi(secondsStr)
+    if err != nil {
+        return 0, err
+    }
+
+    // Calculer le nombre total de minutes
+    totalHours := float64(hours + minutes/60) + float64(seconds)/3600.0
+
+    return totalHours, nil
+}
+
 
 // Fonction pour analyser une couleur hexadécimale au format #RRGGBB
 func parseHexColor(hexColor string) color.RGBA {
@@ -356,7 +413,6 @@ func main() { // now for debogging
     markColor := "#FFE6FF"                                          // mark color       (HEXA)
 	var newFilename string  
     var newJSONname string
-    var atsu int
 
     newFilename, err := getICS(url, calendarsFolder, filename)
     if err != nil {
