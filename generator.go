@@ -201,6 +201,12 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
     for _, event := range events {
         //fmt.Println(event)
         // Dessiner le rectangle de l'événement avec la couleur principale
+        DtStart_data := event.DtStart
+        DtEnd_data := event.DtEnd
+        fmt.Println(DtEnd_data, DtStart_data)
+        dtstart_date_data, _ := extractDate(DtStart_data)
+        dtstart_hour_data, _ := extractHour(DtStart_data)
+        fmt.Println(dtstart_date_data, dtstart_hour_data)
         dc.SetColor(mainHexColor)
         dc.DrawRectangle(100, 100, 200, 100) // Spécifiez les coordonnées et les dimensions de votre rectangle
         dc.Fill()
@@ -281,6 +287,24 @@ func extractHour(input string) (string, error) {
     return hourStr, nil
 }
 
+func getDayOfWeek(inputDate string) (int, error) {
+    // Convertir la chaîne d'entrée au format "YYYYMMDD" en une valeur de type time.Time
+    date, err := time.Parse("20060102", inputDate)
+    if err != nil {
+        return 0, err
+    }
+
+    // Obtenir le jour de la semaine (0 = dimanche, 1 = lundi, ..., 6 = samedi)
+    dayOfWeek := int(date.Weekday())
+
+    // Remapper le dimanche de 0 à 7
+    if dayOfWeek == 0 {
+        dayOfWeek = 7
+    }
+
+    return dayOfWeek, nil
+}
+
 // Fonction pour analyser une couleur hexadécimale au format #RRGGBB
 func parseHexColor(hexColor string) color.RGBA {
     hex := strings.TrimPrefix(hexColor, "#")
@@ -332,10 +356,7 @@ func main() { // now for debogging
     markColor := "#FFE6FF"                                          // mark color       (HEXA)
 	var newFilename string  
     var newJSONname string
-    test := "20230814T060000Z"
-    var azb string
-    var bzb string
-
+    var atsu int
 
     newFilename, err := getICS(url, calendarsFolder, filename)
     if err != nil {
