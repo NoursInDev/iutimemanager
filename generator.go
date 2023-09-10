@@ -163,12 +163,11 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
     if err != nil {
         return err
     }
-    fmt.Println(events)
 
     // Créer une image avec une taille spécifique (vous pouvez ajuster la taille selon vos besoins)
-    const width = 1920
-    const height = 1080
-    lineWidth := 5.0
+    const width = 2560  //>>>config.json
+    const height = 1440 //>>>config.json
+    lineWidth := 5.0    //>>>config.json
     dc := gg.NewContext(width, height)
     dc.SetLineWidth(lineWidth)
     // Définir les couleurs à partir des chaînes hexadécimales
@@ -183,18 +182,24 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
     fmt.Println(markHexColor)
     // Dessiner les barres horaires
     dc.SetColor(scdHexColor)
+    x_offset := 0.1 * width - 50
     for i := 8; i <= 20; i++ {
-        x := float64(i-7) * width / 14 + lineWidth/2 
+        y := float64(i-7) * height / 14 + lineWidth/2
+        dc.DrawLine( 0, y, width, y)
+        dc.Stroke()
+    }
+    for i:= 1; i <= 5; i++ {
+        x := float64(i) * width / 5 * 0.9 + lineWidth/2 - (x_offset)
         dc.DrawLine(x, 0, x, height)
         dc.Stroke()
     }
 
     // Dessiner les jours et les événements
     dc.SetColor(textHexColor)
-    dc.LoadFontFace("/path/to/your/font.ttf", 12) // Spécifiez le chemin de votre police de caractères
+    dc.LoadFontFace("/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf", 12) // Spécifiez le chemin de votre police de caractères
 
     for _, event := range events {
-        fmt.Println(event)
+        //fmt.Println(event)
         // Dessiner le rectangle de l'événement avec la couleur principale
         dc.SetColor(mainHexColor)
         dc.DrawRectangle(100, 100, 200, 100) // Spécifiez les coordonnées et les dimensions de votre rectangle
@@ -216,11 +221,64 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
     return nil
 }
 
+
+
+
+
+
+
+
 // Fonction pour charger les événements depuis le fichier JSON (à implémenter)
-func loadEvents(newJSONname string) ([]Event, error) {
-    // Implémentez la logique pour charger les événements à partir du fichier JSON
-    // et retournez-les sous forme de slice d'événements
-    return nil, nil
+func loadEvents(filename string) ([]Event, error) {
+    file, err := os.Open(filename)
+    if err != nil {
+        return nil, err
+    }
+    defer file.Close()
+
+    var events []Event
+    decoder := json.NewDecoder(file)
+    err = decoder.Decode(&events)
+    if err != nil {
+        return nil, err
+    }
+
+    return events, nil
+}
+
+func extractDate(input string) (string, error) {
+    // Définir le format de la chaîne d'entrée
+    layout := "20060102T150405Z"
+
+    // Analyser la chaîne d'entrée en tant que temps
+    t, err := time.Parse(layout, input)
+    if err != nil {
+        return "", err
+    }
+
+    // Extraire la date au format YYYYMMDD
+    dateStr := t.Format("20060102")
+
+    return dateStr, nil
+}
+
+func extractHour(input string) (string, error) {
+    // Définir le format de la chaîne d'entrée
+    layout := "20060102T150405Z"
+
+    // Analyser la chaîne d'entrée en tant que temps
+    t, err := time.Parse(layout, input)
+    if err != nil {
+        return "", err
+    }
+
+    // Ajouter +2 heures au temps
+    t = t.Add(2 * time.Hour)
+
+    // Extraire l'heure au format HHMMSS
+    hourStr := t.Format("150405")
+
+    return hourStr, nil
 }
 
 // Fonction pour analyser une couleur hexadécimale au format #RRGGBB
@@ -249,6 +307,15 @@ func hexToDec(hex string) uint8 {
 }
 
 
+
+
+
+
+
+
+
+
+
 //
 
 //
@@ -265,6 +332,10 @@ func main() { // now for debogging
     markColor := "#FFE6FF"                                          // mark color       (HEXA)
 	var newFilename string  
     var newJSONname string
+    test := "20230814T060000Z"
+    var azb string
+    var bzb string
+
 
     newFilename, err := getICS(url, calendarsFolder, filename)
     if err != nil {
