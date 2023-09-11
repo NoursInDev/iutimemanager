@@ -199,14 +199,14 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
     dc.SetColor(textHexColor)
     dc.LoadFontFace("/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf", 12) // Spécifiez le chemin de votre police de caractères
 
+    var arused_data [][]float64
+
     for _, event := range events {
         // Dessiner le rectangle de l'événement avec la couleur principale
         DtStart_data := event.DtStart
-        DtEnd_data := event.DtEnd
 
         dtstart_date_data, _ := extractDate(DtStart_data)
         dtstart_hour_data, _ := extractHour(DtStart_data)
-        dtend_hour_data, _ := extractHour(DtEnd_data)
 
         x1_placement_var, err := getDayOfWeek(dtstart_date_data)
         if err != nil {
@@ -216,17 +216,17 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
         if err != nil {
             fmt.Println("Erreur:", err)
         }
-        y2_placement_var, err := timeStringToHours(dtend_hour_data)
-        if err != nil {
-            fmt.Println("Erreur:", err)
-        }
 
         x1_placement := ((x1_placement_var - 1) * width / 5) + (x_offset) - 50*x1_placement_var
         x2_placement := float64(width / 5) - 150
         y1_placement := (y1_placement_var - 7) * height / 14
         y2_placement := 1.33 * height / 14
-        fmt.Println(y1_placement, y2_placement_var)
+        fmt.Println(x1_placement, " - ", x2_placement, " | ", y1_placement, " - ",y2_placement)
 
+        appendlist := []float64{x1_placement,x2_placement,y1_placement,y2_placement}
+        
+
+        arused_data = append(arused_data, appendlist)
 
         dc.SetColor(mainHexColor)
         dc.DrawRectangle(x1_placement, y1_placement, x2_placement, y2_placement) // Spécifiez les coordonnées et les dimensions de votre rectangle
@@ -242,7 +242,7 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
     if err := dc.SavePNG(imageFilename); err != nil {
         return err
     }
-
+    fmt.Println(arused_data)
     fmt.Printf("Calendrier généré et enregistré sous: %s\n", imageFilename)
 
     return nil
@@ -385,7 +385,17 @@ func hexToDec(hex string) uint8 {
     return uint8(result)
 }
 
-
+func areValuesEqual(values1, values2 []float64) bool {
+    if len(values1) != len(values2) {
+        return false
+    }
+    for i, value := range values1 {
+        if value != values2[i] {
+            return false
+        }
+    }
+    return true
+}
 
 
 
@@ -402,8 +412,8 @@ func main() { // now for debogging
     url := "https://edt.univ-nantes.fr/iut_nantes/g3173.ics"        // url in .ics format (>config.json)
     filename := "calendar.txt"                                      // file name configuration (>config.json)
 	calendarsFolder := "iCalendars/"	                            // data file storage folder (>config.json)
-	startDate := "20230901"                                         // week start date
-	endDate := "20230930"                                           // week end date
+	startDate := "20230911"                                         // week start date
+	endDate := "20230918"                                           // week end date
 	picturesFolder := "calendars/"                                  // calendar picture storage folder
     mainColor := "#EA94E2"                                          // main color       (HEXA)
     scdColor := "#F6928F"                                           // secondary color  (HEXA)
