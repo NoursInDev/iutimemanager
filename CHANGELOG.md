@@ -11,3 +11,4 @@
 **2023/09/11**
 > patched input time data
 > added function areValuesEqual
+> added function contains

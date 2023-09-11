@@ -221,17 +221,18 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
         x2_placement := float64(width / 5) - 150
         y1_placement := (y1_placement_var - 7) * height / 14
         y2_placement := 1.33 * height / 14
-        fmt.Println(x1_placement, " - ", x2_placement, " | ", y1_placement, " - ",y2_placement)
 
         appendlist := []float64{x1_placement,x2_placement,y1_placement,y2_placement}
         
-
-        arused_data = append(arused_data, appendlist)
-
-        dc.SetColor(mainHexColor)
-        dc.DrawRectangle(x1_placement, y1_placement, x2_placement, y2_placement) // Spécifiez les coordonnées et les dimensions de votre rectangle
-        dc.Fill()
-
+        if !contains(arused_data, appendlist) {
+            arused_data = append(arused_data, appendlist)
+            
+            fmt.Println(x1_placement, " - ", x2_placement, " | ", y1_placement, " - ",y2_placement)
+            
+            dc.SetColor(mainHexColor)
+            dc.DrawRectangle(x1_placement, y1_placement, x2_placement, y2_placement) // Spécifiez les coordonnées et les dimensions de votre rectangle
+            dc.Fill()
+        }
         // Écrire le nom, le lieu et la description de l'événement avec la couleur du texte
         dc.DrawStringWrapped(event.Name+"\n"+event.Place+"\n"+event.Description, 100, 100, 0, 0, 200, 12, gg.AlignLeft)
         dc.Stroke()
@@ -397,6 +398,14 @@ func areValuesEqual(values1, values2 []float64) bool {
     return true
 }
 
+func contains(slice [][]float64, element []float64) bool {
+    for _, item := range slice {
+        if areValuesEqual(item, element) {
+            return true
+        }
+    }
+    return false
+}
 
 
 
