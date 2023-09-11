@@ -12,3 +12,4 @@
 > patched input time data
 > added function areValuesEqual
 > added function contains
+> patched empty data file save in calendar-*.json

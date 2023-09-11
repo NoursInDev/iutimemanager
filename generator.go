@@ -127,7 +127,7 @@ func getEvents(newFilename, calendarsFolder, startDate, endDate string) (string,
             currentKey += "-" + date
             currentEvent.DtEnd = fullDate // Ajoutez la date DTEND à l'événement actuel
 
-            if currentEvent.Name != "" || currentEvent.Description != "" {
+            if currentEvent.Name != "" && currentEvent.Description != "" && currentEvent.Name != "XXX-Congé - " && currentEvent.Name != "XXX-Jour Férié - "{
                 events = append(events, currentEvent)
             }
         case currentKey != "":
