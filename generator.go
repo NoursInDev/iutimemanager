@@ -127,8 +127,9 @@ func getEvents(newFilename, calendarsFolder, startDate, endDate string) (string,
             currentKey += "-" + date
             currentEvent.DtEnd = fullDate // Ajoutez la date DTEND à l'événement actuel
 
-            // Ajoutez l'événement à la slice
-            events = append(events, currentEvent)
+            if currentEvent.Name != "" || currentEvent.Description != "" {
+                events = append(events, currentEvent)
+            }
         case currentKey != "":
             switch {
             case strings.HasPrefix(line, "SUMMARY:"):
@@ -228,7 +229,7 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
             arused_data = append(arused_data, appendlist)
             
             fmt.Println(x1_placement, " - ", x2_placement, " | ", y1_placement, " - ",y2_placement)
-            
+
             dc.SetColor(mainHexColor)
             dc.DrawRectangle(x1_placement, y1_placement, x2_placement, y2_placement) // Spécifiez les coordonnées et les dimensions de votre rectangle
             dc.Fill()
