@@ -12,6 +12,7 @@ import (
     "image/color"
     "github.com/fogleman/gg"
     "strconv"
+    "io/ioutil"
 )
 
 //
@@ -21,6 +22,12 @@ type Event struct {
 	Description string `json:"description"`
 	DtStart 	string `json:"dtstart"`
 	DtEnd		string `json:"dtend"`
+}
+
+type Config struct {
+    mainColor   string `json:mainColor`
+    scdColor    string `json:scdColor`
+    markColor   string `json:markColor`
 }
 
 //
@@ -151,6 +158,8 @@ func getEvents(newFilename, calendarsFolder, startDate, endDate string) (string,
         return "0", err
     }
 
+    specialTextProcessing(jsonFullPath)
+
     fmt.Printf("Les données ont été enregistrées dans le fichier JSON : %s\n", jsonFullPath)
 
     return jsonFullPath, nil
@@ -197,8 +206,8 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
     }
 
     // Dessiner les jours et les événements
-    dc.SetColor(textHexColor)
-    dc.LoadFontFace("/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf", 12) // Spécifiez le chemin de votre police de caractères
+    dc.SetColor(mainHexColor)
+    dc.LoadFontFace("fonts/kanit/Kanit-Medium.ttf", 12) // Spécifiez le chemin de votre police de caractères
 
     var arused_data [][]float64
 
@@ -228,15 +237,24 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
         if !contains(arused_data, appendlist) {
             arused_data = append(arused_data, appendlist)
             
-            fmt.Println(x1_placement, " - ", x2_placement, " | ", y1_placement, " - ",y2_placement)
+            fmt.Println(x1_placement, " - ", x2_placement, " | ", y1_placement, " - ",y2_placement, " | ", y1_placement_var)
 
             dc.SetColor(mainHexColor)
             dc.DrawRectangle(x1_placement, y1_placement, x2_placement, y2_placement) // Spécifiez les coordonnées et les dimensions de votre rectangle
             dc.Fill()
+
+            dc.SetColor(textHexColor)
+            
+            textX := x1_placement + 10
+            textY := y1_placement + 10
+
+            // Écrire le nom, le lieu et la description de l'événement avec la couleur du texte
+            dc.DrawStringWrapped(event.Name, textX, textY, 0, 0, 340, 9, gg.AlignLeft)
+            dc.DrawStringWrapped(event.Place, textX + 10, textY + 10, 0, 0, 340, 9, gg.AlignLeft)
+            dc.DrawStringWrapped(event.Description, textX + 20, textY + 20, 0, 0, 340, 9, gg.AlignLeft)
+            dc.Stroke()
         }
-        // Écrire le nom, le lieu et la description de l'événement avec la couleur du texte
-        dc.DrawStringWrapped(event.Name+"\n"+event.Place+"\n"+event.Description, 100, 100, 0, 0, 200, 12, gg.AlignLeft)
-        dc.Stroke()
+
     }
 
     // Enregistrez l'image dans le dossier spécifié avec le nom spécifié (en supprimant .txt)
@@ -244,7 +262,6 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
     if err := dc.SavePNG(imageFilename); err != nil {
         return err
     }
-    fmt.Println(arused_data)
     fmt.Printf("Calendrier généré et enregistré sous: %s\n", imageFilename)
 
     return nil
@@ -356,8 +373,8 @@ func timeStringToHours(input string) (float64, error) {
     }
 
     // Calculer le nombre total de minutes
-    totalHours := float64(hours + minutes/60) + float64(seconds)/3600.0
-
+    totalHours := float64(hours) + float64(minutes)/60 + float64(seconds)/3600.0
+    fmt.Println(totalHours)
     return totalHours, nil
 }
 
@@ -408,7 +425,27 @@ func contains(slice [][]float64, element []float64) bool {
     return false
 }
 
+func specialTextProcessing (fullPath string) error{
+    content, err := ioutil.ReadFile(fullPath)
+    if err != nil {
+        return err
+    }
 
+    // Convertir le contenu en une chaîne de caractères
+    text := string(content)
+
+    // Remplacer toutes les occurrences de "\n" par un espace
+    text = strings.ReplaceAll(text, "\n", " ")
+
+    // Réécrire le contenu modifié dans le fichier
+    err = ioutil.WriteFile(fullPath, []byte(text), 0644)
+    if err != nil {
+        return err
+    }
+
+    fmt.Printf("Les occurrences de '\\n' ont été remplacées par des espaces dans le fichier : %s\n", fullPath)
+    return nil
+}
 
 
 

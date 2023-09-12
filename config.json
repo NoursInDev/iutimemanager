@@ -1,0 +1,15 @@
+{
+    "token": "MTE0ODMwMzMwMDE2OTU2NDI2MA.Gc62WZ.RmyiJFRcYA9DpzPb23qTEU6bH0acZWFvmZSJmQ",
+    "intents": "130907",
+
+
+    "picturesFolder": "calendars/",
+    "calendarsFolder": "iCalendars/",
+    "filename": "calendar.txt",
+
+    "mainColor": "#EA94E2",
+    "scdColor": "#F6928F",
+    "markColor": "#FFE6FF",
+    "textColor": "#FFFFFF"
+  }
+  

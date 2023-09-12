@@ -13,3 +13,10 @@
 > added function areValuesEqual
 > added function contains
 > patched empty data file save in calendar-*.json
+**2023/09/12**
+> added font cairo-type
+> added font kanit
+> defined data location on picture
+> finalised aplha version of generator.go
+> created iutimemanager.js
+> created config.json
