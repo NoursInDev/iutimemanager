@@ -1,8 +1,4 @@
 {
-    "token": "put token here",
-    "intents": "130907",
-
-
     "picturesFolder": "calendars/",
     "calendarsFolder": "iCalendars/",
     "filename": "calendar.txt",
@@ -10,6 +6,11 @@
     "mainColor": "#EA94E2",
     "scdColor": "#F6928F",
     "markColor": "#FFE6FF",
-    "textColor": "#FFFFFF"
+    "textColor": "#FFFFFF",
+
+    "discord":{
+      "token":"put token here",
+      "salon":"1148501840586092614",
+      "intents": "130907"
+    }
   }
-  

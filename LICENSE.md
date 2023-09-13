@@ -19,3 +19,5 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 > ***Copyright (c) 2023 Tanguy Branellec***
+
+//Ecrit moi le code pour un bot discod qui doit executer tous les jours à 1h du matin le code generator (code go compilé), qui attend la fin du programme puis qui envoie dans le salon discord dont l'id est renseigné dans config.json avec la variable "discord.salon" l'image se nommant calendar-yyyy-mm-dd.png (yyyy étant l'année, mm étant le mois et dd étant le jour ou le programme est éxectué) stockée dans le dossier calendars
