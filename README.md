@@ -12,5 +12,5 @@
 - Alpha Dev Stage.
 - Operating functions: getICS, loadEvents, parseHexColor.
 - Bugged functions: CalendarGeneration, main, getEvents
-- *Not implemented currently: discord bot part*
+- *Not currently implemented: discord bot part*
 > ***Please read the terms of use: [Licence](LICENSE.md)***
