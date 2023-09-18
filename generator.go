@@ -160,6 +160,8 @@ func getEvents(newFilename, calendarsFolder, startDate, endDate string) (string,
 
     specialTextProcessing(jsonFullPath)
 
+    DateSorting(jsonFullPath)
+
     fmt.Printf("Les données ont été enregistrées dans le fichier JSON : %s\n", jsonFullPath)
 
     return jsonFullPath, nil
@@ -448,7 +450,54 @@ func specialTextProcessing (fullPath string) error{
 }
 
 
+func DateSorting(fullPath string) error {
+	// Charger le contenu JSON depuis un fichier (assurez-vous d'avoir le fichier JSON sur votre système)
+	fileContent, err := ioutil.ReadFile(fullPath) // Utilisez fullPath au lieu de "fullPath"
+	if err != nil {
+		fmt.Println("Erreur lors de la lecture du fichier JSON:", err)
+		return err // Ajoutez une valeur de retour d'erreur ici
+	}
 
+	// Définir une structure pour stocker les événements filtrés
+	var filteredEvents []Event
+
+	// Analyser le contenu JSON
+	var events []Event
+	if err := json.Unmarshal(fileContent, &events); err != nil {
+		fmt.Println("Erreur lors de l'analyse du JSON:", err)
+		return err // Ajoutez une valeur de retour d'erreur ici
+	}
+
+	// Filtrez les événements
+	for _, event := range events {
+		if areFirstEightDigitsEqual(event.DtStart, event.DtEnd) { // Utilisez la casse correcte ici
+			filteredEvents = append(filteredEvents, event)
+		}
+	}
+
+	// Afficher les événements filtrés
+	for _, event := range filteredEvents {
+		fmt.Printf("Name: %s\nPlace: %s\nDescription: %s\nDtStart: %s\nDtEnd: %s\n\n",
+			event.Name, event.Place, event.Description, event.DtStart, event.DtEnd)
+	}
+
+	return nil // Ajoutez une valeur de retour nil ici pour indiquer que tout s'est bien passé
+}
+
+
+func areFirstEightDigitsEqual(dtstart, dtend string) bool {
+	startTime, err := time.Parse("20060102T150405Z", dtstart)
+	if err != nil {
+		return false
+	}
+	endTime, err := time.Parse("20060102T150405Z", dtend)
+	if err != nil {
+		return false
+	}
+
+	// Comparer les 8 premiers caractères
+	return startTime.Format("20060102") == endTime.Format("20060102")
+}
 
 
 
@@ -459,8 +508,8 @@ func main() { // now for debogging
     url := "https://edt.univ-nantes.fr/iut_nantes/g3173.ics"        // url in .ics format (>config.json)
     filename := "calendar.txt"                                      // file name configuration (>config.json)
 	calendarsFolder := "iCalendars/"	                            // data file storage folder (>config.json)
-	startDate := "20230911"                                         // week start date
-	endDate := "20230918"                                           // week end date
+	startDate := "20230918"                                         // week start date
+	endDate := "20230924"                                           // week end date
 	picturesFolder := "calendars/"                                  // calendar picture storage folder
     mainColor := "#EA94E2"                                          // main color       (HEXA)
     scdColor := "#F6928F"                                           // secondary color  (HEXA)
@@ -485,5 +534,11 @@ func main() { // now for debogging
     err = CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markColor, scdColor, newFilename)
     if err != nil {
         fmt.Println("Erreur:", err)
+        return
+    }
+    err = DateSorting(newJSONname)
+    if err != nil {
+        fmt.Println("Erreur:", err)
+        return
     }
 }
