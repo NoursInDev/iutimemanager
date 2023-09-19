@@ -81,9 +81,10 @@ func getICS(url string, calendarsFolder string, filename string) (string, error)
         return "0", err
     }
 	fmt.Println("newFilename name:", newFilename)
-    return newFilename, nil
 
     fmt.Println("Successfully downloaded and renamed:", newFilename)
+
+    return newFilename, nil
 }
 
 //
@@ -453,35 +454,6 @@ func contains(slice [][]float64, element []float64) bool {
     return false
 }
 
-// filter start and end dates to keep only course dates
-func DateSorting(fullPath string) error {
-	fileContent, err := ioutil.ReadFile(fullPath)
-	if err != nil {
-		fmt.Println("Error reading JSON file:", err)
-		return err
-	}
-
-	var filteredEvents []Event
-
-	var events []Event
-	if err := json.Unmarshal(fileContent, &events); err != nil {
-		fmt.Println("Error parsing JSON:", err)
-		return err
-	}
-
-	for _, event := range events {
-		if areFirstEightDigitsEqual(event.DtStart, event.DtEnd) {
-			filteredEvents = append(filteredEvents, event)
-		}
-	}
-
-	for _, event := range filteredEvents {
-		fmt.Printf("Name: %s\nPlace: %s\nDescription: %s\nDtStart: %s\nDtEnd: %s\n\n",
-			event.Name, event.Place, event.Description, event.DtStart, event.DtEnd)
-	}
-
-	return nil
-}
 
 
 func areFirstEightDigitsEqual(dtstart, dtend string) bool {
@@ -552,11 +524,6 @@ func main() {
     err = CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, scdColor, newFilename)
     if err != nil {
         fmt.Println("Error generating calendar:", err)
-        return
-    }
-    err = DateSorting(newJSONname)
-    if err != nil {
-        fmt.Println("Error sorting dates:", err)
         return
     }
 }
