@@ -20,3 +20,9 @@
 > finalised aplha version of generator.go
 > created iutimemanager.js
 > created config.json
+**2023/09/19**
+> Patch for event missposition
+> config.json deepening
+> Overhaul of the data recovery system
+> added function filterEventsByDateRange
+> config.json link setuping
