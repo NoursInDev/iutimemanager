@@ -529,14 +529,15 @@ func main() { // now for debogging*
     }
 
     url := config.Planning[os.Args[1]]                              // url in .ics format (>config.json)
-    filename := config.Settings[filename]                            // file name configuration (>config.json)
-	calendarsFolder := config.Settings[calendarsFolder]	            // data file storage folder (>config.json)
-	startDate := os.Args[2]                                         // week start date
-	endDate := os.Args[3]                                           // week end date
-	picturesFolder := config.Settings.[picturesFolder]                // calendar picture storage folder
-    mainColor := config.Settings.[mainColor]                          // main color       (HEXA)
-    scdColor := config.Settings.[scdColor]                            // secondary color  (HEXA)
-    textColor := config.Settings.[textColor]                          // text color       (HEXA)
+    startDate := os.Args[2]
+	endDate := os.Args[3]
+    filename := config.Settings["filename"]
+    calendarsFolder := config.Settings["calendarsFolder"]
+    picturesFolder := config.Settings["picturesFolder"]
+    mainColor := config.Settings["mainColor"]
+    scdColor := config.Settings["scdColor"]
+    textColor := config.Settings["textColor"]
+    
 	var newFilename string
     var newJSONname string
 
