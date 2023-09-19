@@ -26,3 +26,4 @@
 > Overhaul of the data recovery system
 > added function filterEventsByDateRange
 > config.json link setuping
+> DateSorting function deleted
