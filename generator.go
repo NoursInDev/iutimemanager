@@ -22,12 +22,16 @@ type Event struct {
 	Description string `json:"description"`
 	DtStart 	string `json:"dtstart"`
 	DtEnd		string `json:"dtend"`
+    UID         string `json:"uid`
+    Type_start  string `json:"type_start"`
+    Type_end    string `json:"type_end"`
+    Categories  string `json:"categories"`
+    DtStamp     string `json:"dtstamp"`
 }
 
 type Config struct {
-    mainColor   string `json:mainColor`
-    scdColor    string `json:scdColor`
-    markColor   string `json:markColor`
+    Planning map[string]string `json:"planning"`
+    Settings map[string]string `json:"generator_config"`
 }
 
 //
@@ -112,40 +116,31 @@ func getEvents(newFilename, calendarsFolder, startDate, endDate string) (string,
 
     // Create a slice to store all events
     var events []Event
-
-    // Temporary variables to store event information currently being processed
     var currentEvent Event
-    var currentKey string
-
     scanner := bufio.NewScanner(file)
     for scanner.Scan() {
         line := scanner.Text()
         switch {
-        case strings.HasPrefix(line, "DTSTART:"):
-            date := line[8:18] // Extrait DTSTART date au format YYYYMMDD
-            fullDate := line[8:]
-            if date >= startDate && date <= endDate {
-                currentKey = date
-                currentEvent.DtStart = fullDate // Ajoutez la date DTSTART à l'événement actuel
-            }
-        case strings.HasPrefix(line, "DTEND:") && currentKey != "":
-            date := line[6:16] // Extrait DTEND date au format YYYYMMDD
-            fullDate := line [6:]
-            currentKey += "-" + date
-            currentEvent.DtEnd = fullDate // Ajoutez la date DTEND à l'événement actuel
-
-            if currentEvent.Name != "" && currentEvent.Description != "" && currentEvent.Name != "XXX-Congé - " && currentEvent.Name != "XXX-Jour Férié - "{
-                events = append(events, currentEvent)
-            }
-        case currentKey != "":
-            switch {
+            case strings.HasPrefix(line, "BEGIN:VEVENT"):
+                currentEvent := Event{}
+                currentEvent.Type_start = line [6:]
+            case strings.HasPrefix(line, "DTSTART:"):
+                currentEvent.DtStart = line [8:]
+            case strings.HasPrefix(line, "DTEND:"):
+                currentEvent.DtEnd = line [6:]
+            case strings.HasPrefix(line, "UID:"):
+                currentEvent.UID = line [4:]
             case strings.HasPrefix(line, "SUMMARY:"):
-                currentEvent.Name = line[8:]
+                currentEvent.Name = line [8:]
             case strings.HasPrefix(line, "LOCATION:"):
-                currentEvent.Place = line[9:]
+                currentEvent.Place = line [9:]
             case strings.HasPrefix(line, "DESCRIPTION:"):
-                currentEvent.Description = line[12:]
-            }
+                currentEvent.Description = line [12:]
+            case strings.HasPrefix(line, "CATEGORIES"):
+                currentEvent.Categories = line [11:]
+            case strings.HasPrefix(line, "END:VEVENT"):
+                currentEvent.Type_end = line [4:]
+                events = append(events, currentEvent)
         }
     }
 
@@ -153,15 +148,11 @@ func getEvents(newFilename, calendarsFolder, startDate, endDate string) (string,
         return "0", err
     }
 
-    // Write all events to JSON file
     if err := encoder.Encode(events); err != nil {
         return "0", err
     }
 
-    specialTextProcessing(jsonFullPath)
-
-    DateSorting(jsonFullPath)
-
+    
     fmt.Printf("Les données ont été enregistrées dans le fichier JSON : %s\n", jsonFullPath)
 
     return jsonFullPath, nil
@@ -170,7 +161,49 @@ func getEvents(newFilename, calendarsFolder, startDate, endDate string) (string,
 //
 
 //
-func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markColor, scdColor, newFilename string) error {
+func filterEventsByDateRange(jsonFilename, startDate, endDate string) error {
+    // Charger les événements depuis le fichier JSON
+    events, err := loadEvents(jsonFilename)
+    if err != nil {
+        return err
+    }
+
+    // Créer une nouvelle liste pour stocker les événements filtrés
+    var filteredEvents []Event
+
+    // Parcourir les événements et filtrer ceux qui sont dans la plage de dates spécifiée
+    for _, event := range events {
+        eventStartDate, err := extractDate(event.DtStart)
+        if err != nil {
+            return err
+        }
+
+        // Vérifier si l'événement se situe entre startDate et endDate
+        if eventStartDate >= startDate && eventStartDate <= endDate {
+            filteredEvents = append(filteredEvents, event)
+        }
+    }
+
+    // Écrire la liste filtrée dans le fichier JSON
+    jsonFile, err := os.Create(jsonFilename)
+    if err != nil {
+        return err
+    }
+    defer jsonFile.Close()
+
+    encoder := json.NewEncoder(jsonFile)
+    if err := encoder.Encode(filteredEvents); err != nil {
+        return err
+    }
+
+    fmt.Printf("Événements filtrés enregistrés dans le fichier JSON : %s\n", jsonFilename)
+    return nil
+}
+
+//
+
+//
+func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, scdColor, newFilename string) error {
     // Charger les données du fichier JSON (vous devrez implémenter cette partie)
     events, err := loadEvents(newJSONname)
     if err != nil {
@@ -186,13 +219,8 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
     // Définir les couleurs à partir des chaînes hexadécimales
     mainHexColor := parseHexColor(mainColor)
     textHexColor := parseHexColor(textColor)
-    markHexColor := parseHexColor(markColor)
     scdHexColor := parseHexColor(scdColor)
 
-    // Remplir l'arrière-plan avec la couleur scdHexColor
-    //dc.SetColor(markHexColor)
-    //dc.Clear()
-    fmt.Println(markHexColor)
     // Dessiner les barres horaires
     dc.SetColor(scdHexColor)
     x_offset := 0.1 * width
@@ -219,6 +247,8 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markC
 
         dtstart_date_data, _ := extractDate(DtStart_data)
         dtstart_hour_data, _ := extractHour(DtStart_data)
+
+        fmt.Println(dtstart_date_data, "***", dtstart_hour_data, "***", DtStart_data)
 
         x1_placement_var, err := getDayOfWeek(dtstart_date_data)
         if err != nil {
@@ -427,28 +457,6 @@ func contains(slice [][]float64, element []float64) bool {
     return false
 }
 
-func specialTextProcessing (fullPath string) error{
-    content, err := ioutil.ReadFile(fullPath)
-    if err != nil {
-        return err
-    }
-
-    // Convertir le contenu en une chaîne de caractères
-    text := string(content)
-
-    // Remplacer toutes les occurrences de "\n" par un espace
-    text = strings.ReplaceAll(text, "\n", " ")
-
-    // Réécrire le contenu modifié dans le fichier
-    err = ioutil.WriteFile(fullPath, []byte(text), 0644)
-    if err != nil {
-        return err
-    }
-
-    fmt.Printf("Les occurrences de '\\n' ont été remplacées par des espaces dans le fichier : %s\n", fullPath)
-    return nil
-}
-
 
 func DateSorting(fullPath string) error {
 	// Charger le contenu JSON depuis un fichier (assurez-vous d'avoir le fichier JSON sur votre système)
@@ -504,25 +512,39 @@ func areFirstEightDigitsEqual(dtstart, dtend string) bool {
 //
 
 //
-func main() { // now for debogging 
-    url := "https://edt.univ-nantes.fr/iut_nantes/g3173.ics"        // url in .ics format (>config.json)
-    filename := "calendar.txt"                                      // file name configuration (>config.json)
-	calendarsFolder := "iCalendars/"	                            // data file storage folder (>config.json)
-	startDate := "20230918"                                         // week start date
-	endDate := "20230924"                                           // week end date
-	picturesFolder := "calendars/"                                  // calendar picture storage folder
-    mainColor := "#EA94E2"                                          // main color       (HEXA)
-    scdColor := "#F6928F"                                           // secondary color  (HEXA)
-    textColor := "#FFFFFF"                                          // text color       (HEXA)
-    markColor := "#FFE6FF"                                          // mark color       (HEXA)
-	var newFilename string  
+func main() { // now for debogging*
+    
+    configFilename := "config.json"
+    var config Config
+    configFile, err := ioutil.ReadFile(configFilename)
+    if err != nil {
+        fmt.Println("Erreur lors de la lecture du fichier config.json :", err)
+        return
+    }
+
+    // Décodez le contenu JSON dans la structure de configuration
+    if err := json.Unmarshal(configFile, &config); err != nil {
+        fmt.Println("Erreur lors du décodage du fichier config.json :", err)
+        return
+    }
+
+    url := config.Planning[os.Args[1]]                              // url in .ics format (>config.json)
+    filename := config.Settings[filename]                            // file name configuration (>config.json)
+	calendarsFolder := config.Settings[calendarsFolder]	            // data file storage folder (>config.json)
+	startDate := os.Args[2]                                         // week start date
+	endDate := os.Args[3]                                           // week end date
+	picturesFolder := config.Settings.[picturesFolder]                // calendar picture storage folder
+    mainColor := config.Settings.[mainColor]                          // main color       (HEXA)
+    scdColor := config.Settings.[scdColor]                            // secondary color  (HEXA)
+    textColor := config.Settings.[textColor]                          // text color       (HEXA)
+	var newFilename string
     var newJSONname string
 
-    newFilename, err := getICS(url, calendarsFolder, filename)
+    newFilename, err = getICS(url, calendarsFolder, filename)
     if err != nil {
         fmt.Println("Erreur:", err)
         return
-    }
+        }
 
     fmt.Println("Téléchargement réussi et renommé:", newFilename)
 
@@ -531,7 +553,13 @@ func main() { // now for debogging
 		fmt.Println("Erreur:", err)
 		return
     	}
-    err = CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, markColor, scdColor, newFilename)
+    err = filterEventsByDateRange(newJSONname, startDate, endDate)
+    if err != nil {
+        fmt.Println("Erreur lors de la filtration des événements par date :", err)
+        return
+    }
+        
+    err = CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, scdColor, newFilename)
     if err != nil {
         fmt.Println("Erreur:", err)
         return

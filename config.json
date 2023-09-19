@@ -1,16 +1,40 @@
 {
-    "picturesFolder": "calendars/",
-    "calendarsFolder": "iCalendars/",
-    "filename": "calendar.txt",
+    "generator_config": {
+      "picturesFolder": "calendars/",
+      "calendarsFolder": "iCalendars/",
+      "filename": "calendar.txt",
+      "mainColor":"#EA94E2",
+      "scdColor":"#F6928F",
+      "textColor":"#FFFFFF"
+    },  
 
-    "mainColor": "#EA94E2",
-    "scdColor": "#F6928F",
-    "markColor": "#FFE6FF",
-    "textColor": "#FFFFFF",
 
     "discord":{
       "token":"put token here",
       "salon":"1148501840586092614",
       "intents": "130907"
+    },
+
+    "planning": {
+      "1_1.1":"https://edt.univ-nantes.fr/iut_nantes/g3163.ics",
+      "1_1.2":"https://edt.univ-nantes.fr/iut_nantes/g3164.ics",
+      "1_2.1":"https://edt.univ-nantes.fr/iut_nantes/g3165.ics",
+      "1_2.2":"https://edt.univ-nantes.fr/iut_nantes/g3166.ics",
+      "1_3.1":"https://edt.univ-nantes.fr/iut_nantes/g3167.ics",
+      "1_3.2":"https://edt.univ-nantes.fr/iut_nantes/g3168.ics",
+      "1_4.1":"https://edt.univ-nantes.fr/iut_nantes/g3170.ics",
+      "1_4.2":"https://edt.univ-nantes.fr/iut_nantes/g3173.ics",
+      "2_1.1":"https://edt.univ-nantes.fr/iut_nantes/g3183.ics",
+      "2_1.2":"https://edt.univ-nantes.fr/iut_nantes/g3184.ics",
+      "2_2.1":"https://edt.univ-nantes.fr/iut_nantes/g3187.ics",
+      "2_2.2":"https://edt.univ-nantes.fr/iut_nantes/g3188.ics",
+      "2_3.1":"https://edt.univ-nantes.fr/iut_nantes/g3189.ics",
+      "2_3.2":"https://edt.univ-nantes.fr/iut_nantes/g3190.ics",
+      "2_4.1":"https://edt.univ-nantes.fr/iut_nantes/g3191.ics",
+      "2_4.2":"https://edt.univ-nantes.fr/iut_nantes/g3192.ics",  
+      "3_1.1":"https://edt.univ-nantes.fr/iut_nantes/g1112649.ics",
+      "3_1.2":"https://edt.univ-nantes.fr/iut_nantes/g1112644.ics",
+      "3_2.1":"https://edt.univ-nantes.fr/iut_nantes/g1112647.ics",
+      "3_2.2":"https://edt.univ-nantes.fr/iut_nantes/g1112648.ics"
     }
   }
