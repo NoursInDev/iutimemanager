@@ -7,7 +7,7 @@ const client = new Discord.Client({intents:[config.discord.intents]});
 
 client.once('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
-  // Planifier la tâche quotidienne à 1h du matin
+  // Planning daily task at 1 a.m.
   cron.schedule('0 1 * * *', () => {
     executeGoCodeAndSendImage();
   });
@@ -16,7 +16,6 @@ client.once('ready', () => {
 client.login(config.discord.token);
 
 function executeGoCodeAndSendImage() {
-  // Récupérer la date actuelle
   const currentDate = new Date();
   const year = currentDate.getFullYear();
   const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
