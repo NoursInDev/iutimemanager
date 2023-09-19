@@ -7,10 +7,10 @@ const client = new Discord.Client({ intents: [config.discord.intents] });
 
 client.once('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
-  // Obtenir la liste des IDs de serveur à partir de config.json
+  // Obtain the list of server IDs from config.json
   const serverIds = Object.keys(config.channels_id);
 
-  // Planifier la tâche pour chaque ID de serveur
+  // Schedule the task for each server ID
   serverIds.forEach((serverId) => {
     cron.schedule('0 1 * * *', () => {
       executeGoCodeAndSendImage(serverId);
@@ -20,37 +20,39 @@ client.once('ready', () => {
 
 client.login(config.discord.token);
 
+// Function to get the nearest Monday before the current date
 function getNearestMondayBehind() {
   const currentDate = new Date();
-  const currentDayOfWeek = currentDate.getDay(); // 0 pour dimanche, 1 pour lundi, ..., 6 pour samedi
+  const currentDayOfWeek = currentDate.getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
 
-  const daysUntilMonday = currentDayOfWeek === 0 ? 6 : currentDayOfWeek - 1; // Nombre de jours jusqu'à lundi
+  const daysUntilMonday = currentDayOfWeek === 0 ? 6 : currentDayOfWeek - 1; // Number of days until Monday
   const mondayDate = new Date(currentDate);
   mondayDate.setDate(currentDate.getDate() - daysUntilMonday);
 
-  // Format de la date en YYYYMMDD
+  // Date format in YYYYMMDD
   const year = mondayDate.getFullYear();
   const month = (mondayDate.getMonth() + 1).toString().padStart(2, '0');
   const day = mondayDate.getDate().toString().padStart(2, '0');
   return `${year}${month}${day}`;
 }
 
+// Function to get the nearest Sunday ahead of the current date
 function getNearestSundayAhead() {
   const currentDate = new Date();
-  const currentDayOfWeek = currentDate.getDay(); // 0 pour dimanche, 1 pour lundi, ..., 6 pour samedi
+  const currentDayOfWeek = currentDate.getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
 
-  const daysUntilSunday = 7 - currentDayOfWeek; // Nombre de jours jusqu'à dimanche
+  const daysUntilSunday = 7 - currentDayOfWeek; // Number of days until Sunday
   const sundayDate = new Date(currentDate);
   sundayDate.setDate(currentDate.getDate() + daysUntilSunday);
 
-  // Format de la date en YYYYMMDD
+  // Date format in YYYYMMDD
   const year = sundayDate.getFullYear();
   const month = (sundayDate.getMonth() + 1).toString().padStart(2, '0');
   const day = sundayDate.getDate().toString().padStart(2, '0');
   return `${year}${month}${day}`;
 }
 
-
+// Function to execute Go code and send an image to Discord
 function executeGoCodeAndSendImage(serverId) {
   const currentDate = new Date();
   const year = currentDate.getFullYear();
@@ -58,15 +60,14 @@ function executeGoCodeAndSendImage(serverId) {
   const day = currentDate.getDate().toString().padStart(2, '0');
   const imageName = `calendar-${year}-${month}-${day}.png`;
 
-  // Obtenez l'URL associée à l'ID du serveur à partir de config.json
+  // Get the URL associated with the server ID from config.json
   const url = config.planning[serverId];
   if (!url) {
-    console.error(`L'URL n'a pas été trouvée pour le serveur ID ${serverId}.`);
+    console.error(`URL not found for server ID ${serverId}.`);
     return;
   }
 
-  // Obtenez la date de début et de fin de la semaine au format YYYYMMDD
-// Utilisation :
+  // Get the start and end date of the week in YYYYMMDD format
   const startDate = getNearestMondayBehind();
   const endDate = getNearestSundayAhead();
 
@@ -74,33 +75,34 @@ function executeGoCodeAndSendImage(serverId) {
   console.log(`EndDate: ${endDate}`);
 
   const { exec } = require('child_process');
-  // Exécutez votre programme Go avec les paramètres appropriés (serverId, startDate, endDate)
+  // Execute your Go program with the appropriate parameters (serverId, startDate, endDate)
   exec(`main ${serverId} ${startDate} ${endDate}`, (error, stdout, stderr) => {
     if (error) {
-      console.error(`Erreur lors de l'exécution du programme Go : ${error}`);
+      console.error(`Error when executing the Go program: ${error}`);
       return;
     }
-    console.log(`Sortie du programme Go : ${stdout}`);
+    console.log(`Go program output: ${stdout}`);
     sendImageToDiscord(serverId, imageName);
   });
 }
 
+// Function to send an image to a Discord channel
 function sendImageToDiscord(serverId, imageName) {
   const channelId = config.channels_id[serverId];
   const channel = client.channels.cache.get(channelId);
 
   if (!channel) {
-    console.error(`Le salon avec l'ID ${channelId} n'a pas été trouvé.`);
+    console.error(`Channel with ID ${channelId} not found.`);
     return;
   }
 
   const imagePath = `./calendars/${imageName}`;
 
-  // Vérifier si le fichier image existe
+  // Check if the image file exists
   if (fs.existsSync(imagePath)) {
     const attachment = new Discord.MessageAttachment(imagePath);
-    channel.send(`Image du calendrier pour aujourd'hui :`, attachment);
+    channel.send(`Calendar image for today:`, attachment);
   } else {
-    console.error(`Le fichier image ${imageName} n'a pas été trouvé.`);
+    console.error(`Image file ${imageName} not found.`);
   }
 }
