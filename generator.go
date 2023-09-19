@@ -47,7 +47,7 @@ func getICS(url string, calendarsFolder string, filename string) (string, error)
 
     // Check the response code status
     if response.StatusCode != http.StatusOK {
-        return "0", fmt.Errorf("Erreur de téléchargement: Code de statut %d", response.StatusCode)
+        return "0", fmt.Errorf("Download Error: Status Indicator: %d", response.StatusCode)
     }
 
 	fullPath := calendarsFolder + filename
@@ -71,7 +71,7 @@ func getICS(url string, calendarsFolder string, filename string) (string, error)
     // New file name using the specified format
     parts := strings.Split(filename, ".")
     if len(parts) < 2 {
-        return "0", fmt.Errorf("Nom de fichier invalide")
+        return "0", fmt.Errorf("Invalid file name")
     }
     newFilename := fmt.Sprintf("%s-%s.%s", strings.TrimSuffix(parts[0], "_"), currentDate, parts[1])
 
@@ -82,6 +82,8 @@ func getICS(url string, calendarsFolder string, filename string) (string, error)
     }
 	fmt.Println("newFilename name:", newFilename)
     return newFilename, nil
+
+    fmt.Println("Successfully downloaded and renamed:", newFilename)
 }
 
 //
@@ -153,7 +155,7 @@ func getEvents(newFilename, calendarsFolder, startDate, endDate string) (string,
     }
 
     
-    fmt.Printf("Les données ont été enregistrées dans le fichier JSON : %s\n", jsonFullPath)
+    fmt.Printf("Successfully saved in the JSON file: %s\n", jsonFullPath)
 
     return jsonFullPath, nil
 }
@@ -196,7 +198,7 @@ func filterEventsByDateRange(jsonFilename, startDate, endDate string) error {
         return err
     }
 
-    fmt.Printf("Événements filtrés enregistrés dans le fichier JSON : %s\n", jsonFilename)
+    fmt.Printf("Filtered events successfully saved in JSON file: %s\n", jsonFilename)
     return nil
 }
 
@@ -252,7 +254,7 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, scdCo
 
         x1_placement_var, err := getDayOfWeek(dtstart_date_data)
         if err != nil {
-            fmt.Println("Erreur:", err)
+            fmt.Println("Error: Failed to retrieve the day: ", err)
         }
         y1_placement_var, err := timeStringToHours(dtstart_hour_data)
         if err != nil {
@@ -294,7 +296,7 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, scdCo
     if err := dc.SavePNG(imageFilename); err != nil {
         return err
     }
-    fmt.Printf("Calendrier généré et enregistré sous: %s\n", imageFilename)
+    fmt.Printf("Calendar successfully generated and saved as: %s\n", imageFilename)
 
     return nil
 }
@@ -377,7 +379,7 @@ func getDayOfWeek(inputDate string) (float64, error) {
 func timeStringToHours(input string) (float64, error) {
     // check validity of input
     if len(input) != 6 {
-        return 0, fmt.Errorf("Problème de la chaine d'entrée: pas sous format (HHMMSS)")
+        return 0, fmt.Errorf("Input chain problem: not in format (HHMMSS)")
     }
 
     hoursStr := input[0:2]
@@ -455,7 +457,7 @@ func contains(slice [][]float64, element []float64) bool {
 func DateSorting(fullPath string) error {
 	fileContent, err := ioutil.ReadFile(fullPath)
 	if err != nil {
-		fmt.Println("Erreur lors de la lecture du fichier JSON:", err)
+		fmt.Println("Error reading JSON file:", err)
 		return err
 	}
 
@@ -463,7 +465,7 @@ func DateSorting(fullPath string) error {
 
 	var events []Event
 	if err := json.Unmarshal(fileContent, &events); err != nil {
-		fmt.Println("Erreur lors de l'analyse du JSON:", err)
+		fmt.Println("Error parsing JSON:", err)
 		return err
 	}
 
@@ -506,13 +508,13 @@ func main() {
     var config Config
     configFile, err := ioutil.ReadFile(configFilename)
     if err != nil {
-        fmt.Println("Erreur lors de la lecture du fichier config.json :", err)
+        fmt.Println("Error reading config.json file:", err)
         return
     }
 
     // Decode the JSON content in the configuration structure
     if err := json.Unmarshal(configFile, &config); err != nil {
-        fmt.Println("Erreur lors du décodage du fichier config.json :", err)
+        fmt.Println("Error decoding config.json file:", err)
         return
     }
 
@@ -532,31 +534,29 @@ func main() {
 
     newFilename, err = getICS(url, calendarsFolder, filename)
     if err != nil {
-        fmt.Println("Erreur:", err)
+        fmt.Println("Error while retrieving ICS file:", err)
         return
         }
 
-    fmt.Println("Téléchargement réussi et renommé:", newFilename)
-
 	newJSONname, err = getEvents(newFilename, calendarsFolder, startDate, endDate)
 	if err != nil {
-		fmt.Println("Erreur:", err)
+		fmt.Println("Error filling JSON file:", err)
 		return
     	}
     err = filterEventsByDateRange(newJSONname, startDate, endDate)
     if err != nil {
-        fmt.Println("Erreur lors de la filtration des événements par date :", err)
+        fmt.Println("Error filtering events by date:", err)
         return
     }
         
     err = CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, scdColor, newFilename)
     if err != nil {
-        fmt.Println("Erreur:", err)
+        fmt.Println("Error generating calendar:", err)
         return
     }
     err = DateSorting(newJSONname)
     if err != nil {
-        fmt.Println("Erreur:", err)
+        fmt.Println("Error sorting dates:", err)
         return
     }
 }
