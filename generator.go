@@ -162,29 +162,29 @@ func getEvents(newFilename, calendarsFolder, startDate, endDate string) (string,
 
 //
 func filterEventsByDateRange(jsonFilename, startDate, endDate string) error {
-    // Charger les événements depuis le fichier JSON
+    // Load events from JSON file
     events, err := loadEvents(jsonFilename)
     if err != nil {
         return err
     }
 
-    // Créer une nouvelle liste pour stocker les événements filtrés
+    // Create a new list to store filtered events
     var filteredEvents []Event
 
-    // Parcourir les événements et filtrer ceux qui sont dans la plage de dates spécifiée
+    // Browse events and filter those within the specified date range
     for _, event := range events {
         eventStartDate, err := extractDate(event.DtStart)
         if err != nil {
             return err
         }
 
-        // Vérifier si l'événement se situe entre startDate et endDate
+        // Check if the event is between startDate and endDate
         if eventStartDate >= startDate && eventStartDate <= endDate {
             filteredEvents = append(filteredEvents, event)
         }
     }
 
-    // Écrire la liste filtrée dans le fichier JSON
+    // Write the filtered list to the JSON file
     jsonFile, err := os.Create(jsonFilename)
     if err != nil {
         return err
@@ -204,24 +204,24 @@ func filterEventsByDateRange(jsonFilename, startDate, endDate string) error {
 
 //
 func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, scdColor, newFilename string) error {
-    // Charger les données du fichier JSON (vous devrez implémenter cette partie)
+    // Load data from JSON file
     events, err := loadEvents(newJSONname)
     if err != nil {
         return err
     }
 
-    // Créer une image avec une taille spécifique (vous pouvez ajuster la taille selon vos besoins)
-    const width = 2560  //>>>config.json
-    const height = 1440 //>>>config.json
-    lineWidth := 5.0    //>>>config.json
+    // Create an image with a specific size
+    const width = 2560  
+    const height = 1440 
+    lineWidth := 5.0    
     dc := gg.NewContext(width, height)
     dc.SetLineWidth(lineWidth)
-    // Définir les couleurs à partir des chaînes hexadécimales
+    // Defines colors from hexadecimal strings
     mainHexColor := parseHexColor(mainColor)
     textHexColor := parseHexColor(textColor)
     scdHexColor := parseHexColor(scdColor)
 
-    // Dessiner les barres horaires
+    // Draw time bars
     dc.SetColor(scdHexColor)
     x_offset := 0.1 * width
     for i := 8; i <= 20; i++ {
@@ -235,14 +235,14 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, scdCo
         dc.Stroke()
     }
 
-    // Dessiner les jours et les événements
+    // Draw days and events
     dc.SetColor(mainHexColor)
-    dc.LoadFontFace("fonts/kanit/Kanit-Medium.ttf", 12) // Spécifiez le chemin de votre police de caractères
+    dc.LoadFontFace("fonts/kanit/Kanit-Medium.ttf", 12)
 
     var arused_data [][]float64
 
     for _, event := range events {
-        // Dessiner le rectangle de l'événement avec la couleur principale
+        // Draw event rectangle with main color
         DtStart_data := event.DtStart
 
         dtstart_date_data, _ := extractDate(DtStart_data)
@@ -272,7 +272,7 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, scdCo
             fmt.Println(x1_placement, " - ", x2_placement, " | ", y1_placement, " - ",y2_placement, " | ", y1_placement_var)
 
             dc.SetColor(mainHexColor)
-            dc.DrawRectangle(x1_placement, y1_placement, x2_placement, y2_placement) // Spécifiez les coordonnées et les dimensions de votre rectangle
+            dc.DrawRectangle(x1_placement, y1_placement, x2_placement, y2_placement) // Specifying rectangle coordinates and dimensions
             dc.Fill()
 
             dc.SetColor(textHexColor)
@@ -280,7 +280,7 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, scdCo
             textX := x1_placement + 10
             textY := y1_placement + 10
 
-            // Écrire le nom, le lieu et la description de l'événement avec la couleur du texte
+            // Write the name, location and description of the event in text color
             dc.DrawStringWrapped(event.Name, textX, textY, 0, 0, 340, 9, gg.AlignLeft)
             dc.DrawStringWrapped(event.Place, textX + 10, textY + 10, 0, 0, 340, 9, gg.AlignLeft)
             dc.DrawStringWrapped(event.Description, textX + 20, textY + 20, 0, 0, 340, 9, gg.AlignLeft)
@@ -289,7 +289,7 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, scdCo
 
     }
 
-    // Enregistrez l'image dans le dossier spécifié avec le nom spécifié (en supprimant .txt)
+    // Save the image in the specified folder with the specified name (deleting .txt)
     imageFilename := picturesFolder + strings.TrimSuffix(newFilename, ".txt") + ".png"
     if err := dc.SavePNG(imageFilename); err != nil {
         return err
@@ -306,7 +306,7 @@ func CalendarGeneration(picturesFolder, newJSONname, mainColor, textColor, scdCo
 
 
 
-// Fonction pour charger les événements depuis le fichier JSON (à implémenter)
+// Function to load events from JSON file
 func loadEvents(filename string) ([]Event, error) {
     file, err := os.Open(filename)
     if err != nil {
@@ -324,52 +324,49 @@ func loadEvents(filename string) ([]Event, error) {
     return events, nil
 }
 
+// Function to extract Date from full Date&Time string
 func extractDate(input string) (string, error) {
-    // Définir le format de la chaîne d'entrée
+    // Define input string format
     layout := "20060102T150405Z"
 
-    // Analyser la chaîne d'entrée en tant que temps
     t, err := time.Parse(layout, input)
     if err != nil {
         return "", err
     }
 
-    // Extraire la date au format YYYYMMDD
     dateStr := t.Format("20060102")
 
     return dateStr, nil
 }
 
+// Function to extract Time (in Hours) from full Date&Time string
 func extractHour(input string) (string, error) {
-    // Définir le format de la chaîne d'entrée
+    // Define input string format
     layout := "20060102T150405Z"
 
-    // Analyser la chaîne d'entrée en tant que temps
     t, err := time.Parse(layout, input)
     if err != nil {
         return "", err
     }
 
-    // Ajouter +2 heures au temps
     t = t.Add(2 * time.Hour)
 
-    // Extraire l'heure au format HHMMSS
     hourStr := t.Format("150405")
 
     return hourStr, nil
 }
 
+// Function to get the day in the week according to an input date
 func getDayOfWeek(inputDate string) (float64, error) {
-    // Convertir la chaîne d'entrée au format "YYYYMMDD" en une valeur de type time.Time
+    // Convert the input string in "YYYYMMDD" format into a time.Time value
     date, err := time.Parse("20060102", inputDate)
     if err != nil {
         return 0, err
     }
 
-    // Obtenir le jour de la semaine (0 = dimanche, 1 = lundi, ..., 6 = samedi)
     dayOfWeek := float64(date.Weekday())
 
-    // Remapper le dimanche de 0 à 7
+    // Reset Sunday from 0 to 7 (EU format)
     if dayOfWeek == 0 {
         dayOfWeek = 7
     }
@@ -378,17 +375,15 @@ func getDayOfWeek(inputDate string) (float64, error) {
 }
 
 func timeStringToHours(input string) (float64, error) {
-    // Assurez-vous que la chaîne d'entrée a une longueur valide (HHMMSS)
+    // check validity of input
     if len(input) != 6 {
         return 0, fmt.Errorf("Problème de la chaine d'entrée: pas sous format (HHMMSS)")
     }
 
-    // Extraire les heures, les minutes et les secondes de la chaîne d'entrée
     hoursStr := input[0:2]
     minutesStr := input[2:4]
     secondsStr := input[4:6]
 
-    // Convertir les parties de la chaîne en entiers
     hours, err := strconv.Atoi(hoursStr)
     if err != nil {
         return 0, err
@@ -404,14 +399,13 @@ func timeStringToHours(input string) (float64, error) {
         return 0, err
     }
 
-    // Calculer le nombre total de minutes
     totalHours := float64(hours) + float64(minutes)/60 + float64(seconds)/3600.0
     fmt.Println(totalHours)
     return totalHours, nil
 }
 
 
-// Fonction pour analyser une couleur hexadécimale au format #RRGGBB
+// Function to analyze a hexadecimal color in #RRGGBB format
 func parseHexColor(hexColor string) color.RGBA {
     hex := strings.TrimPrefix(hexColor, "#")
     r := hexToDec(hex[0:2])
@@ -420,7 +414,7 @@ func parseHexColor(hexColor string) color.RGBA {
     return color.RGBA{r, g, b, 255}
 }
 
-// Fonction pour convertir une chaîne hexadécimale en entier décimal
+// Function to convert a hexadecimal string into a decimal integer
 func hexToDec(hex string) uint8 {
     var result uint64
     for i := 0; i < len(hex); i++ {
@@ -457,39 +451,34 @@ func contains(slice [][]float64, element []float64) bool {
     return false
 }
 
-
+// filter start and end dates to keep only course dates
 func DateSorting(fullPath string) error {
-	// Charger le contenu JSON depuis un fichier (assurez-vous d'avoir le fichier JSON sur votre système)
-	fileContent, err := ioutil.ReadFile(fullPath) // Utilisez fullPath au lieu de "fullPath"
+	fileContent, err := ioutil.ReadFile(fullPath)
 	if err != nil {
 		fmt.Println("Erreur lors de la lecture du fichier JSON:", err)
-		return err // Ajoutez une valeur de retour d'erreur ici
+		return err
 	}
 
-	// Définir une structure pour stocker les événements filtrés
 	var filteredEvents []Event
 
-	// Analyser le contenu JSON
 	var events []Event
 	if err := json.Unmarshal(fileContent, &events); err != nil {
 		fmt.Println("Erreur lors de l'analyse du JSON:", err)
-		return err // Ajoutez une valeur de retour d'erreur ici
+		return err
 	}
 
-	// Filtrez les événements
 	for _, event := range events {
-		if areFirstEightDigitsEqual(event.DtStart, event.DtEnd) { // Utilisez la casse correcte ici
+		if areFirstEightDigitsEqual(event.DtStart, event.DtEnd) {
 			filteredEvents = append(filteredEvents, event)
 		}
 	}
 
-	// Afficher les événements filtrés
 	for _, event := range filteredEvents {
 		fmt.Printf("Name: %s\nPlace: %s\nDescription: %s\nDtStart: %s\nDtEnd: %s\n\n",
 			event.Name, event.Place, event.Description, event.DtStart, event.DtEnd)
 	}
 
-	return nil // Ajoutez une valeur de retour nil ici pour indiquer que tout s'est bien passé
+	return nil
 }
 
 
@@ -503,7 +492,6 @@ func areFirstEightDigitsEqual(dtstart, dtend string) bool {
 		return false
 	}
 
-	// Comparer les 8 premiers caractères
 	return startTime.Format("20060102") == endTime.Format("20060102")
 }
 
@@ -512,7 +500,7 @@ func areFirstEightDigitsEqual(dtstart, dtend string) bool {
 //
 
 //
-func main() { // now for debogging*
+func main() {
     
     configFilename := "config.json"
     var config Config
@@ -522,13 +510,14 @@ func main() { // now for debogging*
         return
     }
 
-    // Décodez le contenu JSON dans la structure de configuration
+    // Decode the JSON content in the configuration structure
     if err := json.Unmarshal(configFile, &config); err != nil {
         fmt.Println("Erreur lors du décodage du fichier config.json :", err)
         return
     }
 
-    url := config.Planning[os.Args[1]]                              // url in .ics format (>config.json)
+    // initial variables (linked to config.json)
+    url := config.Planning[os.Args[1]]
     startDate := os.Args[2]
 	endDate := os.Args[3]
     filename := config.Settings["filename"]
