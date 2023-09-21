@@ -27,3 +27,8 @@
 > added function filterEventsByDateRange
 > config.json link setuping
 > DateSorting function deleted
+**2023/09/20**
+> Putting the discord bot on VPS
+**2023/09/21**
+> Changed automatic filename assignment
+> Changed calendar filename call for js
