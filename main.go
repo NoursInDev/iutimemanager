@@ -50,7 +50,7 @@ func getICS(url string, calendarsFolder string, filename string) (string, error)
         return "0", fmt.Errorf("Download Error: Status Indicator: %d", response.StatusCode)
     }
 
-	fullPath := calendarsFolder + filename
+	fullPath := calendarsFolder + filename + "_" + os.Args[1]
 
     // Local file creation
     file, err := os.Create(fullPath)
@@ -73,7 +73,7 @@ func getICS(url string, calendarsFolder string, filename string) (string, error)
     if len(parts) < 2 {
         return "0", fmt.Errorf("Invalid file name")
     }
-    newFilename := fmt.Sprintf("%s-%s.%s", strings.TrimSuffix(parts[0], "_"), currentDate, parts[1])
+    newFilename := fmt.Sprintf("%s-%s_%s.txt", filename, currentDate, os.Args[1])
 
     // Rename file
     err = os.Rename(fullPath, calendarsFolder + newFilename)
