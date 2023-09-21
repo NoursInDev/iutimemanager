@@ -58,7 +58,7 @@ function executeGoCodeAndSendImage(serverId) {
   const year = currentDate.getFullYear();
   const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
   const day = currentDate.getDate().toString().padStart(2, '0');
-  const imageName = `calendar-${year}-${month}-${day}.png`;
+  const imageName = `calendar-${year}-${month}-${day}_${serverId}.png`;
 
   // Get the URL associated with the server ID from config.json
   const url = config.planning[serverId];
