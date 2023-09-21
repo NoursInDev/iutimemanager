@@ -9,8 +9,8 @@
 > 
 > Config.js configuration: not currently implemented
 # CURRENT ADVANCEMENT
-- Alpha Dev Stage.
-- Operating functions: getICS, loadEvents, parseHexColor.
-- Bugged functions: CalendarGeneration, main, getEvents
-- *Not currently implemented: discord bot part*
+- **Beta** Dev Stage. (0.2.1)
+- Operating functions: getICS, getEvents, filterEventsByDateRange, CalendarGeneration, loadEvents, extractDate, extractHour, getDayOfWeek, timeStringToHours, parseHexColor, hexToDec, areValuesEqual, contains, areFirstEightDigitsEqual, main
+- Bugged functions: ---
+- Discord bot part: Bugged in v0.2.0, v0.2.1 currently untested
 > ***Please read the terms of use: [Licence](LICENSE.md)***
