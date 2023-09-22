@@ -68,12 +68,7 @@ func getICS(url string, calendarsFolder string, filename string) (string, error)
     // Current date in "YYYY-MM-DD" format
     currentDate := time.Now().Format("2006-01-02")
 
-    // New file name using the specified format
-    parts := strings.Split(filename, ".")
-    if len(parts) < 2 {
-        return "0", fmt.Errorf("Invalid file name")
-    }
-    newFilename := fmt.Sprintf("%s-%s_%s.txt", filename, currentDate, os.Args[1])
+    newFilename := fmt.Sprintf("%s-%s_%s", filename, currentDate, os.Args[1], ".txt")
 
     // Rename file
     err = os.Rename(fullPath, calendarsFolder + newFilename)

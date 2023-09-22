@@ -12,7 +12,7 @@ client.once('ready', () => {
 
   // Schedule the task for each server ID
   serverIds.forEach((serverId) => {
-    cron.schedule('0 1 * * *', () => {
+    cron.schedule('0 9 * * *', () => {
       executeGoCodeAndSendImage(serverId);
     });
   });

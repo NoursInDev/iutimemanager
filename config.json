@@ -2,7 +2,7 @@
     "generator_config": {
       "picturesFolder": "calendars/",
       "calendarsFolder": "iCalendars/",
-      "filename": "calendar.txt",
+      "filename": "calendar",
       "mainColor":"#EA94E2",
       "scdColor":"#F6928F",
       "textColor":"#FFFFFF"
