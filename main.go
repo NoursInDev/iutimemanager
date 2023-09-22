@@ -50,7 +50,12 @@ func getICS(url string, calendarsFolder string, filename string) (string, error)
         return "0", fmt.Errorf("Download Error: Status Indicator: %d", response.StatusCode)
     }
 
-	fullPath := calendarsFolder + filename + "_" + os.Args[1]
+    currentDate := time.Now().Format("2006-01-02")
+
+    fullPath := calendarsFolder + filename + "_" + os.Args[1]
+
+    newFilename := fmt.Sprintf("%s-%s_%s", filename, currentDate, os.Args[1])
+
 
     // Local file creation
     file, err := os.Create(fullPath)
@@ -65,10 +70,6 @@ func getICS(url string, calendarsFolder string, filename string) (string, error)
         return "0", err
     }
 
-    // Current date in "YYYY-MM-DD" format
-    currentDate := time.Now().Format("2006-01-02")
-
-    newFilename := fmt.Sprintf("%s-%s_%s", filename, currentDate, os.Args[1], ".txt")
 
     // Rename file
     err = os.Rename(fullPath, calendarsFolder + newFilename)
@@ -97,7 +98,7 @@ func getEvents(newFilename, calendarsFolder, startDate, endDate string) (string,
     defer file.Close()
 
     // Create .json file without a .txt extension
-    jsonFilename := strings.TrimSuffix(newFilename, ".txt") + ".json"
+    jsonFilename := newFilename + ".json"
 
     // Create full path for .json file
     jsonFullPath := calendarsFolder + jsonFilename
