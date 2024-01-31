@@ -5,7 +5,8 @@
       "filename": "calendar",
       "mainColor":"#EA94E2",
       "scdColor":"#F6928F",
-      "textColor":"#FFFFFF"
+      "textColor":"#FFFFFF",
+      "mainPath": "/home/tbran/Documents/DEV/iutimemanager"
     },  
 
     "planning": {
@@ -32,8 +33,8 @@
     },
 
     "discord":{
-      "token":"put token here",
-      "guild":"put discord serv id here",
+      "token":"--",
+      "guild":"--",
       "intents": "130907"
     },
 

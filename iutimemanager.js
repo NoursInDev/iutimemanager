@@ -12,7 +12,7 @@ client.once('ready', () => {
 
   // Schedule the task for each server ID
   serverIds.forEach((serverId) => {
-    cron.schedule('0 9 * * *', () => {
+    cron.schedule('27 11 * * *', () => {
       executeGoCodeAndSendImage(serverId);
     });
   });
@@ -76,6 +76,7 @@ function executeGoCodeAndSendImage(serverId) {
 
   const { exec } = require('child_process');
   // Execute your Go program with the appropriate parameters (serverId, startDate, endDate)
+  process.env.PATH = `${process.env.PATH}:/home/tbran/Documents/DEV/iutimemanager`;
   exec(`main ${serverId} ${startDate} ${endDate}`, (error, stdout, stderr) => {
     if (error) {
       console.error(`Error when executing the Go program: ${error}`);
@@ -100,8 +101,14 @@ function sendImageToDiscord(serverId, imageName) {
 
   // Check if the image file exists
   if (fs.existsSync(imagePath)) {
-    const attachment = new Discord.MessageAttachment(imagePath);
-    channel.send(`Calendar image for today:`, attachment);
+    const file = new Discord.AttachmentBuilder(imagePath);
+
+    const exampleEmbed = {
+      title: 'EMPLOI DU TEMPS DU JOUR',
+    };
+
+    channel.send({ files: [file] });
+    channel.send({ embeds: [exampleEmbed] });
   } else {
     console.error(`Image file ${imageName} not found.`);
   }
